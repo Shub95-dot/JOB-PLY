@@ -1,0 +1,26 @@
+app:
+  name: "job-app-agent"
+  version: "0.1.0"
+  environment: "development"
+
+paths:
+  logs_dir: "logs"
+  applications_log: "logs/applications.log"
+  errors_log: "logs/errors.log"
+  tracker_db: "data/applications_tracker.json"
+  user_profile: "config/user_profile.yaml"
+
+retry:
+  max_retries: 3
+  backoff_factor: 1.5
+
+llm:
+  default_provider: "anthropic"
+  model: "claude-3-5-sonnet-20241022"
+  temperature: 0.3
+  max_tokens: 1000
+
+cover_letter:
+  min_words: 150
+  max_words: 220
+  default_tone: "professional"

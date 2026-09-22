@@ -1,0 +1,61 @@
+name: "Shubham"
+contact:
+  email: "shubham@example.com"
+  phone: "+44 7123 456789"
+  location: "United Kingdom"
+  linkedin: "https://linkedin.com/in/shubham-data"
+  github: "https://github.com/shubham-data"
+
+education:
+  - degree: "B.Sc. / M.Sc. in Data Science & Applied AI"
+    institution: "University"
+    graduation_year: 2024
+    details: "Focused on Applied AI, Machine Learning, Statistical Analysis, Data Engineering, and Exploratory Data Analysis."
+
+skills:
+  - "Python"
+  - "SQL"
+  - "Excel"
+  - "Power BI"
+  - "Tableau"
+  - "Statistics"
+  - "ML Basics"
+  - "Data Cleaning"
+  - "EDA"
+  - "Pandas"
+  - "NumPy"
+  - "Scikit-Learn"
+
+projects:
+  - title: "Maternal Health Risk Analysis & Prediction"
+    tech_stack: ["Python", "SQL", "Scikit-Learn", "EDA", "Power BI"]
+    description: "Performed end-to-end exploratory data analysis and predictive modeling on maternal health risk datasets. Cleaned raw clinical data, conducted hypothesis testing, built supervised classification models, and developed interactive dashboards to communicate clinical insights."
+  - title: "Automated Job Search & Application Intelligence Engine"
+    tech_stack: ["Python", "Pydantic", "PyYAML", "BeautifulSoup4", "REST APIs"]
+    description: "Architected a production-grade automated pipeline to aggregate, filter, and score job descriptions using NLP and ATS keyword matching algorithms for data analytics and science roles."
+
+experience:
+  - role: "Junior Data Analyst / Project Intern"
+    company: "Data Solutions Lab"
+    duration: "2023 - 2024"
+    highlights:
+      - "Analyzed structured relational databases using SQL to extract actionable business metrics and customer cohorts."
+      - "Developed automated Python scripts for data cleaning, transformation, and validation, cutting data preprocessing time by 40%."
+      - "Designed interactive Power BI and Tableau dashboards tracking core KPI metrics for cross-functional stakeholders."
+
+preferences:
+  target_roles:
+    - "Data Analyst"
+    - "Junior Data Analyst"
+    - "Business Analyst"
+    - "Junior Data Scientist"
+    - "Graduate Data Scientist"
+    - "Analytics Engineer"
+  work_types:
+    - "Remote"
+    - "Hybrid"
+    - "On-site"
+  locations:
+    - "Remote"
+    - "United Kingdom"
+    - "London"

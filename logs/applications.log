@@ -1,0 +1,36 @@
+[2026-09-22 05:40:33] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at A - Matched title pattern and junior level criteria with 2 core data skills (Python, Sql).
+[2026-09-22 05:40:33] [INFO] [job_filter]: [REJECT] Principal Architect at B - Excluded senior keyword 'principal' found in job title.
+[2026-09-22 05:40:33] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-22 05:40:33] [INFO] [profile_manager]: Loaded profile for Shubham
+[2026-09-22 05:40:33] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-22 05:40:33] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched title pattern and junior level criteria with 6 core data skills (Sql, Power Bi, Excel, Eda).
+[2026-09-22 05:40:33] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched title pattern and junior level criteria with 5 core data skills (Sql, Ml Basics, Python, Statistics).
+[2026-09-22 05:40:33] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-22 05:40:33] [INFO] [workflow]: Filtered 3 jobs -> 2 accepted roles.
+[2026-09-22 05:40:33] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-22 05:40:33] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-22 05:40:33] [INFO] [workflow]: Workflow completed. Processed 2 applications successfully.
+[2026-09-22 05:41:02] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-22 05:41:02] [INFO] [profile_manager]: Loaded profile for Shubham
+[2026-09-22 05:41:02] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-22 05:41:02] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched title pattern and junior level criteria with 6 core data skills (Power Bi, Sql, Eda, Data Cleaning).
+[2026-09-22 05:41:02] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched title pattern and junior level criteria with 5 core data skills (Sql, Statistics, Exploratory Data Analysis, Ml Basics).
+[2026-09-22 05:41:02] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-22 05:41:02] [INFO] [job_filter]: [ACCEPT] Business Analyst (Data & Insights) at Fintech Solutions - Matched title pattern and junior level criteria with 3 core data skills (Sql, Data Cleaning, Tableau).
+[2026-09-22 05:41:02] [INFO] [workflow]: Filtered 4 jobs -> 3 accepted roles.
+[2026-09-22 05:41:02] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-22 05:41:02] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-22 05:41:02] [INFO] [form_filler]: Generated form submission payload for Business Analyst (Data & Insights) at Fintech Solutions
+[2026-09-22 05:41:02] [INFO] [workflow]: Workflow completed. Processed 3 applications successfully.
+[2026-09-22 05:51:40] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at A - Matched title pattern and junior level criteria with 2 core data skills (Sql, Python).
+[2026-09-22 05:51:40] [INFO] [job_filter]: [REJECT] Principal Architect at B - Excluded senior keyword 'principal' found in job title.
+[2026-09-22 05:51:40] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-22 05:51:40] [INFO] [profile_manager]: Loaded profile for Shubham
+[2026-09-22 05:51:40] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-22 05:51:40] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched title pattern and junior level criteria with 6 core data skills (Power Bi, Data Cleaning, Eda, Sql).
+[2026-09-22 05:51:40] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched title pattern and junior level criteria with 5 core data skills (Ml Basics, Sql, Python, Exploratory Data Analysis).
+[2026-09-22 05:51:40] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-22 05:51:40] [INFO] [workflow]: Filtered 3 jobs -> 2 accepted roles.
+[2026-09-22 05:51:40] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-22 05:51:40] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-22 05:51:40] [INFO] [workflow]: Workflow completed. Processed 2 applications successfully.

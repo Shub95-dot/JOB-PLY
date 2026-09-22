@@ -1,0 +1,52 @@
+include_titles:
+  - "data analyst"
+  - "junior data analyst"
+  - "business analyst"
+  - "junior data scientist"
+  - "graduate data scientist"
+  - "analytics engineer"
+  - "reporting analyst"
+  - "insights analyst"
+  - "data science trainee"
+  - "junior analyst"
+
+allowed_levels:
+  - "entry-level"
+  - "entry level"
+  - "junior"
+  - "graduate"
+  - "trainee"
+  - "associate"
+  - "intern"
+  - "training"
+  - "mentorship"
+
+preferred_skills:
+  - "python"
+  - "sql"
+  - "excel"
+  - "power bi"
+  - "tableau"
+  - "statistics"
+  - "ml basics"
+  - "machine learning"
+  - "data cleaning"
+  - "eda"
+  - "exploratory data analysis"
+
+allowed_work_types:
+  - "Remote"
+  - "Hybrid"
+  - "On-site"
+  - "Unspecified"
+
+exclude_keywords:
+  - "senior"
+  - "lead"
+  - "principal"
+  - "manager"
+  - "head of"
+  - "director"
+  - "architect"
+  - "staff"
+  - "vp"
