@@ -7,6 +7,11 @@ import time
 import re
 from typing import Callable, Any, Type, Tuple, Dict
 import yaml
+from dotenv import load_dotenv
+
+# Load environment variables from .env if present
+load_dotenv()
+
 
 
 def setup_logger(
@@ -30,7 +35,13 @@ def setup_logger(
         datefmt="%Y-%m-%d %H:%M:%S"
     )
 
-    # Console Handler
+    # Console Handler (reconfigure to utf-8 on Windows)
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(level)
     console_handler.setFormatter(formatter)

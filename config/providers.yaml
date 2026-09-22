@@ -10,5 +10,11 @@ job_sources:
   remotive:
     enabled: true
     endpoint: "https://remotive.com/api/remote-jobs?category=data"
+  rss:
+    enabled: true
+    endpoints:
+      - "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss"
+      - "https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss"
   mock:
     enabled: true
+
