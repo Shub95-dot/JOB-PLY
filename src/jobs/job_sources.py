@@ -1,7 +1,7 @@
 """Abstractions and concrete implementations for job boards and APIs (free sources)."""
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import requests
 from src.core.models import Job
 from src.core.utils import setup_logger, retry
