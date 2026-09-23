@@ -15,8 +15,23 @@ def main():
         "--source",
         type=str,
         default="all",
-        choices=["mock", "remotive", "rss", "linkedin", "indeed", "reed", "totaljobs", "cvlibrary", "all"],
-        help="Job source provider (choices: mock, remotive, rss, linkedin, indeed, reed, totaljobs, cvlibrary, all. default: all)"
+        choices=[
+            # Grouped choices
+            "all", "remote_all", "hybrid_uk", "onsite_uk",
+            # Remote (Worldwide)
+            "remotive", "rss", "aijobsnet", "outerjoin", "remoteok", "weworkremotely",
+            "himalayas", "remoteco", "wellfound", "builtin", "remotejobslibrary", "globalremotely",
+            # Hybrid (UK)
+            "linkedin", "indeed", "reed", "totaljobs", "cvlibrary",
+            "indeed_hybrid", "reed_hybrid", "totaljobs_hybrid", "cvlibrary_hybrid",
+            "cwjobs", "technojobs", "datasciencejobs", "jobsacuk",
+            # Onsite (UK)
+            "indeed_onsite", "reed_onsite", "totaljobs_onsite", "cvlibrary_onsite",
+            "jooble", "adzuna", "datasciencejobs_onsite",
+            # Testing
+            "mock"
+        ],
+        help="Job source provider or group (e.g. remote_all, hybrid_uk, onsite_uk, all. default: all)"
     )
     parser.add_argument(
         "--dry-run",

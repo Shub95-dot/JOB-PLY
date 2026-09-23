@@ -7,38 +7,109 @@ providers:
       haiku: "claude-3-5-haiku-20241022"
 
 job_sources:
+  # Remote (Worldwide)
   remotive:
     enabled: true
     endpoint: "https://remotive.com/api/remote-jobs?category=data"
-  rss:
+  aijobsnet:
     enabled: true
-    endpoints:
-      - "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss"
-      - "https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss"
+    endpoint: "https://ai-jobs.net/api/jobs/"
+  outerjoin:
+    enabled: true
+    endpoint: "https://outerjoin.us/jobs.json"
+  remoteok:
+    enabled: true
+    endpoint: "https://remoteok.com/api?tag=data"
+  weworkremotely:
+    enabled: true
+    endpoint: "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss"
+  himalayas:
+    enabled: true
+    endpoint: "https://himalayas.app/jobs/api?category=data"
+  remoteco:
+    enabled: true
+    endpoint: "https://remote.co/remote-jobs/developer/"
+  wellfound:
+    enabled: true
+    endpoint: "https://wellfound.com/jobs"
+  builtin:
+    enabled: true
+    endpoint: "https://builtin.com/jobs/remote"
+  remotejobslibrary:
+    enabled: true
+    endpoint: "https://remotejobslibrary.com/jobs"
+  globalremotely:
+    enabled: true
+    endpoint: "https://globalremotely.com/jobs"
+
+  # Hybrid (UK Only)
   linkedin:
     enabled: true
     location: "United Kingdom"
     keywords: "data analyst"
-    endpoint: "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
-  indeed:
+  indeed_hybrid:
     enabled: true
     location: "United Kingdom"
-    keywords: "data analyst"
-    endpoint: "https://uk.indeed.com/jobs"
-  reed:
+    keywords: "hybrid data analyst"
+  reed_hybrid:
     enabled: true
     location: "United Kingdom"
-    keywords: "data analyst"
-    endpoint: "https://www.reed.co.uk/jobs"
-  totaljobs:
+    keywords: "hybrid data analyst"
+  totaljobs_hybrid:
     enabled: true
     location: "united-kingdom"
-    keywords: "data analyst"
-    endpoint: "https://www.totaljobs.com/jobs"
-  cvlibrary:
+    keywords: "hybrid data analyst"
+  cvlibrary_hybrid:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "hybrid data analyst"
+  cwjobs:
     enabled: true
     location: "United Kingdom"
     keywords: "data analyst"
-    endpoint: "https://www.cv-library.co.uk/search-jobs"
+  technojobs:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data analyst"
+  datasciencejobs:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data science"
+  jobsacuk:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "research data analyst"
+
+  # On-site (UK Only)
+  indeed_onsite:
+    enabled: true
+    location: "London"
+    keywords: "data analyst"
+  reed_onsite:
+    enabled: true
+    location: "London"
+    keywords: "data analyst"
+  totaljobs_onsite:
+    enabled: true
+    location: "london"
+    keywords: "data analyst"
+  cvlibrary_onsite:
+    enabled: true
+    location: "London"
+    keywords: "data analyst"
+  jooble:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data analyst"
+  adzuna:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data analyst"
+  datasciencejobs_onsite:
+    enabled: true
+    location: "London"
+    keywords: "reporting analyst"
+
+  # Testing
   mock:
     enabled: true
