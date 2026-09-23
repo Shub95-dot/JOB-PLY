@@ -28,11 +28,13 @@ class Job(BaseModel):
 class Profile(BaseModel):
     """User profile containing candidate background, skills, and preferences."""
     name: str
+    profile_summary: Optional[str] = Field(default=None, description="ATS-optimized professional summary")
     contact: Dict[str, str] = Field(default_factory=dict)
     education: List[Dict[str, Any]] = Field(default_factory=list)
-    skills: List[str] = Field(default_factory=list)
+    skills: Any = Field(default_factory=list, description="Categorized list or dict of candidate technical skills")
     projects: List[Dict[str, Any]] = Field(default_factory=list)
     experience: List[Dict[str, Any]] = Field(default_factory=list)
+    certifications: List[Dict[str, Any]] = Field(default_factory=list)
     preferences: Dict[str, Any] = Field(default_factory=dict)
 
 

@@ -390,3 +390,84 @@
 [2026-09-23 07:25:43] [INFO] [job_filter]: [REJECT] Customer Support Manager at Cribl - Excluded senior keyword 'manager' found in job title.
 [2026-09-23 07:25:43] [INFO] [workflow]: Filtered 50 jobs -> 0 accepted roles.
 [2026-09-23 07:25:43] [INFO] [workflow]: Workflow completed. Processed 0 applications successfully.
+[2026-09-23 07:37:41] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at A - Matched title pattern and junior level criteria with 2 core data skills (Sql, Python).
+[2026-09-23 07:37:41] [INFO] [job_filter]: [REJECT] Principal Architect at B - Excluded senior keyword 'principal' found in job title.
+[2026-09-23 07:37:41] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 07:37:41] [INFO] [job_sources]: Fetching UK jobs from LinkedIn (keywords='data analyst', location='United Kingdom')
+[2026-09-23 07:37:41] [INFO] [job_sources]: Fetched 10 jobs from LinkedIn UK.
+[2026-09-23 07:37:41] [INFO] [job_sources]: Fetching UK jobs from Indeed (keywords='data analyst', location='United Kingdom')
+[2026-09-23 07:37:42] [WARNING] [job_sources]: Indeed UK request returned status 403
+[2026-09-23 07:37:42] [INFO] [job_sources]: Fetched 0 jobs from Indeed UK.
+[2026-09-23 07:37:42] [INFO] [job_sources]: Fetching UK jobs from Reed.co.uk (keywords='data analyst')
+[2026-09-23 07:37:42] [INFO] [job_sources]: Fetched 26 jobs from Reed.co.uk.
+[2026-09-23 07:37:42] [INFO] [job_sources]: Fetching UK jobs from TotalJobs (keywords='data analyst')
+[2026-09-23 07:37:43] [INFO] [job_sources]: Fetched 0 jobs from TotalJobs.
+[2026-09-23 07:37:43] [INFO] [job_sources]: Fetching UK jobs from CV-Library (keywords='data analyst')
+[2026-09-23 07:37:43] [WARNING] [job_sources]: CV-Library returned status 403
+[2026-09-23 07:37:43] [INFO] [job_sources]: Fetched 0 jobs from CV-Library.
+[2026-09-23 07:37:43] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 07:37:43] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-23 07:37:43] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 07:37:43] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 07:37:43] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched title pattern and junior level criteria with 6 core data skills (Power Bi, Data Cleaning, Excel, Python).
+[2026-09-23 07:37:43] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched title pattern and junior level criteria with 5 core data skills (Statistics, Ml Basics, Python, Exploratory Data Analysis).
+[2026-09-23 07:37:43] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 07:37:43] [INFO] [workflow]: Filtered 3 jobs -> 2 accepted roles.
+[2026-09-23 07:37:43] [ERROR] [workflow]: Error processing job Junior Data Analyst at TechMetrics Ltd: unhashable type: 'slice'
+Traceback (most recent call last):
+  File "C:\Users\shiro\OneDrive\Desktop\Python files\Personal Projects\Auto job applying\src\application\workflow.py", line 76, in run
+    cover_let = self.cover_letter_gen.generate(profile, job, resume_ver)
+  File "C:\Users\shiro\OneDrive\Desktop\Python files\Personal Projects\Auto job applying\src\data\cover_letter.py", line 25, in generate
+    letter_text = self._generate_deterministic(profile, job, resume_version)
+  File "C:\Users\shiro\OneDrive\Desktop\Python files\Personal Projects\Auto job applying\src\data\cover_letter.py", line 40, in _generate_deterministic
+    top_skills = ", ".join(profile.skills[:4])
+TypeError: unhashable type: 'slice'
+[2026-09-23 07:37:43] [ERROR] [workflow]: Error processing job Graduate Data Scientist at AI Insights Labs: unhashable type: 'slice'
+Traceback (most recent call last):
+  File "C:\Users\shiro\OneDrive\Desktop\Python files\Personal Projects\Auto job applying\src\application\workflow.py", line 76, in run
+    cover_let = self.cover_letter_gen.generate(profile, job, resume_ver)
+  File "C:\Users\shiro\OneDrive\Desktop\Python files\Personal Projects\Auto job applying\src\data\cover_letter.py", line 25, in generate
+    letter_text = self._generate_deterministic(profile, job, resume_version)
+  File "C:\Users\shiro\OneDrive\Desktop\Python files\Personal Projects\Auto job applying\src\data\cover_letter.py", line 40, in _generate_deterministic
+    top_skills = ", ".join(profile.skills[:4])
+TypeError: unhashable type: 'slice'
+[2026-09-23 07:37:43] [INFO] [workflow]: Workflow completed. Processed 0 applications successfully.
+[2026-09-23 07:40:18] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at A - Matched title pattern and junior level criteria with 2 core data skills (Python, Sql).
+[2026-09-23 07:40:18] [INFO] [job_filter]: [REJECT] Principal Architect at B - Excluded senior keyword 'principal' found in job title.
+[2026-09-23 07:40:18] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 07:40:18] [INFO] [job_sources]: Fetching UK jobs from LinkedIn (keywords='data analyst', location='United Kingdom')
+[2026-09-23 07:40:19] [INFO] [job_sources]: Fetched 10 jobs from LinkedIn UK.
+[2026-09-23 07:40:19] [INFO] [job_sources]: Fetching UK jobs from Indeed (keywords='data analyst', location='United Kingdom')
+[2026-09-23 07:40:19] [WARNING] [job_sources]: Indeed UK request returned status 403
+[2026-09-23 07:40:19] [INFO] [job_sources]: Fetched 0 jobs from Indeed UK.
+[2026-09-23 07:40:19] [INFO] [job_sources]: Fetching UK jobs from Reed.co.uk (keywords='data analyst')
+[2026-09-23 07:40:19] [INFO] [job_sources]: Fetched 26 jobs from Reed.co.uk.
+[2026-09-23 07:40:19] [INFO] [job_sources]: Fetching UK jobs from TotalJobs (keywords='data analyst')
+[2026-09-23 07:40:21] [INFO] [job_sources]: Fetched 0 jobs from TotalJobs.
+[2026-09-23 07:40:21] [INFO] [job_sources]: Fetching UK jobs from CV-Library (keywords='data analyst')
+[2026-09-23 07:40:21] [WARNING] [job_sources]: CV-Library returned status 403
+[2026-09-23 07:40:21] [INFO] [job_sources]: Fetched 0 jobs from CV-Library.
+[2026-09-23 07:40:21] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 07:40:21] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-23 07:40:21] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 07:40:21] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 07:40:21] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched title pattern and junior level criteria with 6 core data skills (Power Bi, Python, Excel, Sql).
+[2026-09-23 07:40:21] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched title pattern and junior level criteria with 5 core data skills (Python, Ml Basics, Statistics, Exploratory Data Analysis).
+[2026-09-23 07:40:21] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 07:40:21] [INFO] [workflow]: Filtered 3 jobs -> 2 accepted roles.
+[2026-09-23 07:40:21] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-23 07:40:21] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-23 07:40:21] [INFO] [workflow]: Workflow completed. Processed 2 applications successfully.
+[2026-09-23 07:41:12] [INFO] [tracker]: Loaded 3 tracked applications from data/applications_tracker.json
+[2026-09-23 07:41:12] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-23 07:41:12] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 07:41:12] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 07:41:12] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched title pattern and junior level criteria with 6 core data skills (Python, Sql, Excel, Power Bi).
+[2026-09-23 07:41:12] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched title pattern and junior level criteria with 5 core data skills (Exploratory Data Analysis, Python, Sql, Statistics).
+[2026-09-23 07:41:12] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 07:41:12] [INFO] [job_filter]: [ACCEPT] Business Analyst (Data & Insights) at Fintech Solutions - Matched title pattern and junior level criteria with 3 core data skills (Tableau, Sql, Data Cleaning).
+[2026-09-23 07:41:12] [INFO] [workflow]: Filtered 4 jobs -> 3 accepted roles.
+[2026-09-23 07:41:12] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-23 07:41:12] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-23 07:41:12] [INFO] [form_filler]: Generated form submission payload for Business Analyst (Data & Insights) at Fintech Solutions
+[2026-09-23 07:41:12] [INFO] [workflow]: Workflow completed. Processed 3 applications successfully.

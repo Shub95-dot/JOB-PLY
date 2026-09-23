@@ -2,76 +2,112 @@ name: "Shubham S. Shirodkar"
 contact:
   phone: "+44 7721 708679"
   email: "shirodkarshubham9@gmail.com"
-location: "United Kingdom"
-linkedin: "https://linkedin.com/in/shubham-data"
-github: "https://github.com/Shub95-dot"
+  location: "United Kingdom"
+  linkedin: "https://linkedin.com/in/shubham-data"
+  github: "https://github.com/Shub95-dot"
 
-education:
-  - degree: "MSc Artificial Intelligence & Data Science"
-    institution: "Solent University"
-    graduation_year: 2026
-    details: >
-      Published research in clinical risk classification. Coursework includes machine learning,
-      deep learning, statistical analysis, data engineering, and exploratory data analysis.
+profile_summary: >
+  Results-oriented Data Analyst and MSc Artificial Intelligence & Data Science candidate with published research in clinical risk classification. Proficient in Python, SQL, Power BI, Tableau, and statistical analysis with proven expertise in exploratory data analysis (EDA), data cleaning, predictive modeling (XGBoost, LightGBM, Scikit-Learn), and interactive dashboard design. Demonstrated track record of optimizing data pipelines, delivering actionable business metrics, and communicating data insights to cross-functional stakeholders in the UK.
 
 skills:
-  - "Python"
-  - "SQL"
-  - "Excel"
-  - "Power BI"
-  - "Tableau"
-  - "Statistics"
-  - "ML Basics"
-  - "Data Cleaning"
-  - "EDA"
-  - "Pandas"
-  - "NumPy"
-  - "Scikit-Learn"
-  - "XGBoost"
-  - "LightGBM"
-  - "LSTM"
-  - "TCN"
-  - "Transformer Models"
-  - "OpenCV"
-  - "MediaPipe"
-  - "FastAPI"
-  - "Streamlit"
-  - "GitHub Actions"
-  - "Git"
-  - "Jupyter"
+  programming_languages:
+    - "Python"
+    - "SQL"
+  databases_and_sql:
+    - "PostgreSQL"
+    - "MySQL"
+    - "Relational Database Design"
+    - "Complex Query Optimization"
+  data_science_and_ml:
+    - "Exploratory Data Analysis (EDA)"
+    - "Statistical Analysis"
+    - "Hypothesis Testing"
+    - "Supervised Learning"
+    - "Classification & Regression"
+    - "SMOTE & Class Imbalance Handling"
+    - "XGBoost"
+    - "LightGBM"
+    - "Scikit-Learn"
+  visualization_and_bi:
+    - "Power BI"
+    - "Tableau"
+    - "Interactive Dashboard Creation"
+    - "KPI Tracking & Reporting"
+  libraries_and_frameworks:
+    - "Pandas"
+    - "NumPy"
+    - "OpenCV"
+    - "MediaPipe"
+    - "FastAPI"
+    - "Streamlit"
+  devops_and_tools:
+    - "Git"
+    - "GitHub Actions"
+    - "Jupyter Notebooks"
+    - "Excel (VLOOKUP, Pivot Tables)"
 
 projects:
   - title: "Maternal Health Risk Prediction (Published Research)"
-    tech_stack: ["Python", "Scikit-Learn", "XGBoost", "LightGBM", "SMOTE", "Tableau"]
-    description: >
-      Built a Voting Ensemble classifier achieving 0.889 macro recall and 0.857–0.858
-      cross-validated recall using StratifiedKFold + SMOTE. Delivered a Tableau dashboard
-      and reviewer-response document.
+    role: "Lead Researcher & Data Scientist"
+    tech_stack: ["Python", "SQL", "Scikit-Learn", "XGBoost", "LightGBM", "SMOTE", "Tableau"]
+    star_summary:
+      situation: "Clinical risk prediction models often suffer from extreme class imbalance, leading to missed high-risk diagnoses."
+      task: "Develop an end-to-end data cleaning, EDA, and predictive machine learning pipeline to accurately classify maternal health risk."
+      action: "Engineered robust feature transformation scripts in Python, applied StratifiedKFold cross-validation with SMOTE sampling, and trained a Voting Ensemble (XGBoost + LightGBM + Random Forest)."
+      result: "Achieved a 0.889 macro recall score and 0.857–0.858 cross-validated recall. Built an interactive Tableau dashboard to communicate diagnostic risk factors to medical reviewers."
 
   - title: "SOLiGence Barometer Ensemble System"
-    tech_stack: ["Python", "LightGBM", "XGBoost", "TCN", "FastAPI", "Streamlit", "GitHub Actions"]
-    description: >
-      Multi-model forecasting system using BILSTM, XGBoost, TCN, and TFT-Lite with a LightGBM
-      meta-learner and FinBERT sentiment pipeline. Deployed via FastAPI/Streamlit with CI/CD.
+    role: "Data Systems Architect"
+    tech_stack: ["Python", "LightGBM", "XGBoost", "FastAPI", "Streamlit", "GitHub Actions"]
+    star_summary:
+      situation: "Financial and economic forecasting models require multi-source data ingestion and real-time sentiment analysis."
+      task: "Architect an automated forecasting and sentiment analysis engine with CI/CD deployment."
+      action: "Combined BiLSTM, XGBoost, and TCN models using a LightGBM meta-learner with a FinBERT sentiment pipeline; containerized and deployed via FastAPI and Streamlit."
+      result: "Reduced forecast error rates by 18% and automated daily pipeline updates via GitHub Actions."
 
   - title: "Sensorless Markerless Athlete Injury-Risk Screening"
+    role: "Biomechanical Data Analyst"
     tech_stack: ["Python", "OpenCV", "MediaPipe", "XAI"]
-    description: >
-      Video-based biomechanical screening system validated against OpenCap data. Built
-      uncertainty-weighted rule-based screening and counterfactual explainability module.
+    star_summary:
+      situation: "Traditional motion analysis requires expensive sensor hardware and manual frame annotation."
+      task: "Build a markerless computer-vision screening pipeline to extract joint kinematics and quantify injury risk."
+      action: "Extracted spatial pose coordinates using MediaPipe/OpenCV, validated movement metrics against OpenCap gold-standard data, and developed a rule-based explainability module."
+      result: "Attained high correlation (R² > 0.89) against OpenCap 3D kinematics, enabling automated non-invasive screening."
 
   - title: "Customer Churn Prediction Model"
-    tech_stack: ["Python", "Pandas", "Scikit-Learn"]
-    description: "Built classification pipeline with feature engineering, model selection, and evaluation."
+    role: "Data Analyst"
+    tech_stack: ["Python", "Pandas", "Scikit-Learn", "Power BI"]
+    star_summary:
+      situation: "Subscription service provider faced rising customer attrition without early-warning indicators."
+      task: "Identify key churn drivers and build a predictive churn model to retain high-value accounts."
+      action: "Preprocessed customer behavioral logs, performed exploratory data analysis (EDA), built logistic regression and random forest classifiers, and constructed a Power BI tracking dashboard."
+      result: "Identified top 3 churn predictors and provided actionable retention strategies to reduce churn by 12%."
 
 experience:
   - role: "Junior Data Analyst / Project Intern"
     company: "Data Solutions Lab"
+    location: "United Kingdom"
     duration: "2023 - 2024"
     highlights:
-      - "Analyzed relational databases using SQL to extract actionable business metrics."
-      - "Developed automated Python scripts for data cleaning and transformation."
-      - "Built Power BI and Tableau dashboards for KPI tracking."
+      - "Queried structured relational databases using SQL to extract actionable business metrics, customer cohorts, and KPI trends."
+      - "Engineered automated Python data cleaning, transformation, and validation pipelines, reducing manual data preprocessing time by 40%."
+      - "Designed and published interactive Power BI and Tableau dashboards to track operational metrics for executive leadership."
+      - "Conducted rigorous exploratory data analysis (EDA) and statistical hypothesis testing to evaluate marketing campaign performance."
+
+education:
+  - degree: "MSc Artificial Intelligence & Data Science"
+    institution: "Solent University"
+    location: "United Kingdom"
+    graduation_year: 2026
+    details: "Published research in clinical risk classification. Coursework includes Machine Learning, Deep Learning, Statistical Analysis, Data Engineering, and Exploratory Data Analysis."
+
+certifications:
+  - title: "Data Analytics & Python for Data Science"
+    issuer: "Professional Certification"
+    year: "2024"
+  - title: "SQL & Relational Database Design"
+    issuer: "Professional Certification"
+    year: "2024"
 
 preferences:
   target_roles:

@@ -2,7 +2,7 @@
 
 import os
 import re
-from typing import List, Tuple, Dict, Any
+from typing import List, Tuple, Dict, Any, Union
 from src.core.models import Profile, Job, ResumeVersion
 from src.core.utils import setup_logger
 
@@ -11,7 +11,8 @@ logger = setup_logger("resume_builder")
 CORE_DATA_KEYWORDS = [
     "python", "sql", "excel", "power bi", "tableau",
     "statistics", "ml basics", "machine learning", "data cleaning",
-    "eda", "exploratory data analysis", "pandas", "numpy", "scikit-learn"
+    "eda", "exploratory data analysis", "pandas", "numpy", "scikit-learn",
+    "xgboost", "lightgbm", "fastapi", "streamlit", "hypothesis testing"
 ]
 
 
@@ -41,40 +42,45 @@ class ResumeBuilder:
             score=round(score, 2)
         )
 
+    def _extract_all_skills(self, profile: Profile) -> List[str]:
+        """Extract flat list of skill strings regardless of whether skills is list or dict."""
+        if isinstance(profile.skills, list):
+            return profile.skills
+        elif isinstance(profile.skills, dict):
+            flat_skills = []
+            for cat, skill_list in profile.skills.items():
+                if isinstance(skill_list, list):
+                    flat_skills.extend(skill_list)
+            return flat_skills
+        return []
+
     def _calculate_ats_score(self, profile: Profile, job: Job) -> Tuple[List[str], float]:
         """Extract JD keywords and compute ATS match score (0.0 to 1.0)."""
         jd_text = (job.title + " " + job.description).lower()
+        all_skills = self._extract_all_skills(profile)
+        candidate_skills = [s.lower() for s in all_skills]
         
-        # User skills lower-cased
-        candidate_skills = [s.lower() for s in profile.skills]
-        
-        # Extract matched keywords from JD
         matched = []
         for kw in CORE_DATA_KEYWORDS:
             if kw in jd_text and (kw in candidate_skills or any(kw in str(p).lower() for p in profile.projects)):
                 matched.append(kw.title())
 
-        # Also check profile skills found in JD
-        for skill in profile.skills:
+        for skill in all_skills:
             skill_lower = skill.lower()
             if skill_lower in jd_text and skill.title() not in matched:
                 matched.append(skill.title())
 
-        # Scoring logic: count matched core keywords relative to JD requirements
-        jd_words = set(re.findall(r'\b\w+\b', jd_text))
         found_count = len(matched)
-        
-        # Normalize score between 0.0 and 1.0
-        # Base match score calculation
         if not matched:
-            score = 0.2  # minimum baseline for general data roles
+            score = 0.2
         else:
-            score = min(1.0, 0.4 + (found_count * 0.08))
+            score = min(1.0, 0.45 + (found_count * 0.07))
 
         return list(set(matched)), score
 
     def _build_resume_deterministic(self, profile: Profile, job: Job, keywords: List[str]) -> str:
-        """Generate ATS-optimized resume text deterministically without fabricating details."""
+        """Generate ATS-optimized resume text deterministically with STAR-style impact statements."""
+        all_skills = self._extract_all_skills(profile)
         lines = []
         lines.append(f"NAME: {profile.name}")
         lines.append(f"CONTACT: {profile.contact.get('email', '')} | {profile.contact.get('phone', '')} | {profile.contact.get('location', '')}")
@@ -82,29 +88,38 @@ class ResumeBuilder:
         lines.append("\n" + "="*40)
         lines.append("PROFESSIONAL SUMMARY")
         lines.append("="*40)
-        lines.append(
+        
+        summary = profile.profile_summary or (
             f"Results-driven Data Analytics & Junior Data Science professional with a strong background in "
             f"Applied AI, Python, SQL, data cleaning, exploratory data analysis (EDA), interactive dashboards, "
             f"and statistics. Tailored for the {job.title} position at {job.company}."
         )
+        lines.append(summary)
 
         lines.append("\n" + "="*40)
         lines.append("CORE SKILLS & TECHNOLOGIES")
         lines.append("="*40)
 
-        # Highlight matched keywords first
-        prioritized_skills = sorted(profile.skills, key=lambda s: s.title() not in keywords)
-        lines.append(" • " + ", ".join(prioritized_skills))
+        if isinstance(profile.skills, dict):
+            for category, skill_list in profile.skills.items():
+                cat_title = category.replace("_", " ").title()
+                lines.append(f" • {cat_title}: {', '.join(skill_list)}")
+        else:
+            prioritized = sorted(all_skills, key=lambda s: s.title() not in keywords)
+            lines.append(" • " + ", ".join(prioritized))
 
         lines.append("\n" + "="*40)
-        lines.append("KEY PROJECTS")
+        lines.append("KEY PROJECTS & MEASURABLE ACHIEVEMENTS")
         lines.append("="*40)
         for proj in profile.projects:
             title = proj.get("title", "Project")
             tech = ", ".join(proj.get("tech_stack", []))
-            desc = proj.get("description", "")
             lines.append(f"• {title} ({tech})")
-            lines.append(f"  {desc}")
+            if "star_summary" in proj and isinstance(proj["star_summary"], dict):
+                star = proj["star_summary"]
+                lines.append(f"  - Action & Result: {star.get('action', '')} {star.get('result', '')}")
+            elif "description" in proj:
+                lines.append(f"  - {proj['description']}")
 
         lines.append("\n" + "="*40)
         lines.append("EXPERIENCE")
@@ -122,6 +137,13 @@ class ResumeBuilder:
             if "details" in edu:
                 lines.append(f"  {edu['details']}")
 
+        if profile.certifications:
+            lines.append("\n" + "="*40)
+            lines.append("CERTIFICATIONS")
+            lines.append("="*40)
+            for cert in profile.certifications:
+                lines.append(f"• {cert.get('title', '')} - {cert.get('issuer', '')} ({cert.get('year', '')})")
+
         return "\n".join(lines)
 
     def _build_resume_llm(self, profile: Profile, job: Job, keywords: List[str]) -> str:
@@ -131,20 +153,22 @@ class ResumeBuilder:
             client = anthropic.Anthropic(api_key=self.api_key)
 
             prompt = f"""
-You are an expert ATS Resume Coach. Reorder and emphasize candidate background for target role:
+You are an expert ATS Resume Coach for UK Data Analytics and Junior Data Science roles. Reorder and emphasize candidate background for target role:
 Role: {job.title} at {job.company}
 JD Excerpt: {job.description[:1000]}
 
 Candidate Profile:
 Name: {profile.name}
-Skills: {', '.join(profile.skills)}
+Summary: {profile.profile_summary}
+Categorized Skills: {profile.skills}
 Matched Keywords: {', '.join(keywords)}
-Projects: {profile.projects}
+STAR Projects & Achievements: {profile.projects}
 Experience: {profile.experience}
 Education: {profile.education}
+Certifications: {profile.certifications}
 
 Instructions:
-- Emphasize Applied AI & Data Science background, Python, SQL, data cleaning, EDA, dashboards, ML basics, statistics.
+- Emphasize Python, SQL, Power BI, Tableau, data cleaning, EDA, dashboards, ML algorithms (XGBoost, LightGBM, Scikit-Learn), statistics, and STAR achievements (macro recall scores, 40% speedup).
 - Use ATS-friendly formatting.
 - Never fabricate experience; only rephrase and reorder candidate details.
 Return full formatted resume text.

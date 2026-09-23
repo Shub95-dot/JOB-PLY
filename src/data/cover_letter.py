@@ -35,9 +35,21 @@ class CoverLetterGenerator:
             length_words=length_words
         )
 
+    def _extract_top_skills(self, profile: Profile) -> list:
+        """Extract flat skill list whether profile.skills is list or dict."""
+        if isinstance(profile.skills, list):
+            return profile.skills[:4]
+        elif isinstance(profile.skills, dict):
+            flat = []
+            for category, skill_list in profile.skills.items():
+                if isinstance(skill_list, list):
+                    flat.extend(skill_list)
+            return flat[:4]
+        return ["Python", "SQL", "Data Analytics"]
+
     def _generate_deterministic(self, profile: Profile, job: Job, resume: ResumeVersion) -> str:
         """Generate job-tailored cover letter deterministically (150-220 words)."""
-        top_skills = ", ".join(profile.skills[:4])
+        top_skills = ", ".join(self._extract_top_skills(profile))
         matched_kws = ", ".join(resume.keywords[:3]) if resume.keywords else "data analytics and Python"
         
         # Reference candidate project
