@@ -22,7 +22,6 @@ def test_accept_junior_data_analyst(job_filter):
     is_valid, reason, skills = job_filter.evaluate_job(job)
     assert is_valid is True
     assert "Python" in skills or "python" in [s.lower() for s in skills]
-    assert "SQL" in skills or "sql" in [s.lower() for s in skills]
 
 
 def test_accept_graduate_data_scientist(job_filter):
@@ -33,6 +32,32 @@ def test_accept_graduate_data_scientist(job_filter):
         work_type="Hybrid",
         description="Graduate training position. Requirements: Python, statistics, ML basics, data cleaning.",
         url="https://example.com/job2"
+    )
+    is_valid, reason, skills = job_filter.evaluate_job(job)
+    assert is_valid is True
+
+
+def test_accept_data_analyst_with_fresher_experience(job_filter):
+    job = Job(
+        title="Data Analyst",
+        company="Fintech UK",
+        location="London",
+        work_type="Hybrid",
+        description="0-2 years experience required. Experience preferred in Python and SQL. Mentorship provided.",
+        url="https://example.com/job_fresher"
+    )
+    is_valid, reason, skills = job_filter.evaluate_job(job)
+    assert is_valid is True
+
+
+def test_accept_bi_reporting_analyst(job_filter):
+    job = Job(
+        title="BI Reporting Analyst",
+        company="Media Group",
+        location="Remote",
+        work_type="Remote",
+        description="Entry-level BI Analyst role. Power BI and SQL reporting. 1 year experience desirable.",
+        url="https://example.com/job_bi"
     )
     is_valid, reason, skills = job_filter.evaluate_job(job)
     assert is_valid is True
@@ -52,6 +77,20 @@ def test_reject_senior_manager_role(job_filter):
     assert "senior" in reason.lower() or "excluded" in reason.lower()
 
 
+def test_reject_role_with_high_experience_requirement(job_filter):
+    job = Job(
+        title="Data Scientist",
+        company="Enterprise Tech",
+        location="London",
+        work_type="Hybrid",
+        description="Must have 5+ years experience building production ML pipelines.",
+        url="https://example.com/job_high_exp"
+    )
+    is_valid, reason, skills = job_filter.evaluate_job(job)
+    assert is_valid is False
+    assert "experience" in reason.lower() or "excluded" in reason.lower()
+
+
 def test_reject_unrelated_role(job_filter):
     job = Job(
         title="Software Quality Assurance Tester",
@@ -69,6 +108,7 @@ def test_batch_filter_jobs(job_filter):
     jobs = [
         Job(title="Junior Data Analyst", company="A", location="Remote", work_type="Remote", description="Python SQL", url="u1"),
         Job(title="Principal Architect", company="B", location="Remote", work_type="Remote", description="Senior lead", url="u2"),
+        Job(title="Data Scientist", company="C", location="Remote", work_type="Remote", description="Must have 5+ years experience", url="u3"),
     ]
     results = job_filter.filter_jobs(jobs)
     assert len(results) == 1

@@ -471,3 +471,310 @@ TypeError: unhashable type: 'slice'
 [2026-09-23 07:41:12] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
 [2026-09-23 07:41:12] [INFO] [form_filler]: Generated form submission payload for Business Analyst (Data & Insights) at Fintech Solutions
 [2026-09-23 07:41:12] [INFO] [workflow]: Workflow completed. Processed 3 applications successfully.
+[2026-09-23 08:33:52] [INFO] [tracker]: Loaded 3 tracked applications from data/applications_tracker.json
+[2026-09-23 08:33:52] [INFO] [workflow]: Starting ApplicationWorkflow (source=all, dry_run=False)
+[2026-09-23 08:33:52] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 08:33:52] [INFO] [job_sources]: Fetching real jobs from Remotive API: https://remotive.com/api/remote-jobs?category=data
+[2026-09-23 08:33:53] [INFO] [job_sources]: Fetched 18 real jobs from Remotive API.
+[2026-09-23 08:33:53] [INFO] [job_sources]: Fetching real jobs from 2 RSS feeds.
+[2026-09-23 08:33:54] [INFO] [job_sources]: Fetched 47 real jobs from RSS feeds.
+[2026-09-23 08:33:54] [INFO] [job_sources]: Fetching UK jobs from LinkedIn (keywords='data analyst', location='United Kingdom')
+[2026-09-23 08:33:55] [INFO] [job_sources]: Fetched 20 jobs from LinkedIn UK.
+[2026-09-23 08:33:55] [INFO] [job_sources]: Fetching UK jobs from Indeed (keywords='data analyst', location='United Kingdom')
+[2026-09-23 08:33:55] [WARNING] [job_sources]: Indeed UK request returned status 403
+[2026-09-23 08:33:55] [INFO] [job_sources]: Fetched 0 jobs from Indeed UK.
+[2026-09-23 08:33:55] [INFO] [job_sources]: Fetching UK jobs from Reed.co.uk (keywords='data analyst')
+[2026-09-23 08:33:57] [INFO] [job_sources]: Fetched 52 jobs from Reed.co.uk.
+[2026-09-23 08:33:57] [INFO] [job_sources]: Fetching UK jobs from TotalJobs (keywords='data analyst')
+[2026-09-23 08:34:00] [INFO] [job_sources]: Fetched 0 jobs from TotalJobs.
+[2026-09-23 08:34:00] [INFO] [job_sources]: Fetching UK jobs from CV-Library (keywords='data analyst')
+[2026-09-23 08:34:00] [WARNING] [job_sources]: CV-Library returned status 403
+[2026-09-23 08:34:00] [INFO] [job_sources]: Fetched 0 jobs from CV-Library.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Frontend Web Application Developer at KoboToolbox - Job title 'Frontend Web Application Developer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Shopify Developer at Sanctuary Computer Inc - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] 🇩🇪 Kundenservice Mobilfunk Inbound - innerhalb der EU (ausgenommen: Deutschland) at hey contact heroes GmbH - Job title '🇩🇪 Kundenservice Mobilfunk Inbound - innerhalb der EU (ausgenommen: Deutschland)' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior AI Engineer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior .NET Full-stack Developer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Scientist at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Independent Software Developer at A.Team - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Independent AI Engineer / Architect at A.Team - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Tech Lead Full-Stack Rails Engineer at Mitre Media - Excluded senior keyword 'lead' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Remote Office Assistant at Coalition Technologies  - Job title 'Remote Office Assistant' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] AI Response Evaluator at iMerit Technology - Job title 'AI Response Evaluator' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Inside Sales Contractor at Credit Wellness, LLC - Job title 'Inside Sales Contractor' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Tier III Service Desk Engineer at Unio Digital - Job title 'Tier III Service Desk Engineer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Freelance Writer at IAPWE - Job title 'Freelance Writer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Freelance Copywriter at Coalition Technologies  - Job title 'Freelance Copywriter' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior React Full-stack Developer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior QA Engineer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior DevOps Engineer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Java Developer at Twikey - Job title 'Java Developer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Backend Developer (Node.js / Nest.js) at Proxify AB - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Backend Developer (Python) at Proxify AB - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Backend Engineer, IAM at Reddit - Job title 'Backend Engineer, IAM' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior PeopleSoft Developer/Analyst II at Princeton University - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Backend Software Engineer, PDP Experience at Reddit - Job title 'Backend Software Engineer, PDP Experience' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Application Security Engineer at Glean - Job title 'Application Security Engineer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Full-Stack Developer - Marketplace Web & Mobile Platform at Adventure Travel 365 - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Cloud Security Engineer at Hex Technologies - Job title 'Cloud Security Engineer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Integration Engineer for Enterprise API & Integration Products at Toptal - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] CPS Account Program Manager at Collibra - Excluded senior keyword 'manager' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] AI agent engineer at Sticker Mule - Job title 'AI agent engineer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Software Engineer at AccuLynx - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Engineer – AWS Data Lake & Pipeline Architecture at Toptal - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Fullstack Developer (React.js / Node.js) at Proxify AB - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Data Scientist II, ML Infrastructure at Pinterest - Job does not specify junior, entry-level, graduate, or trainee experience requirements.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Data Scientist II, Infrastructure at Pinterest - Job does not specify junior, entry-level, graduate, or trainee experience requirements.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Solutions Architect -Spanish Speaking at Fin - Excluded senior keyword 'architect' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Power Platform Solutions Architect at Toptal - Excluded senior keyword 'architect' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Systems Engineer (Identity and Access) at Flexport - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Commercial Account Manager at Salesloft - Excluded senior keyword 'manager' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior .NET Full-stack Developer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Java & React Developer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Director of Production Engineering at Legion - Excluded senior keyword 'director' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Chief Architect at Legion - Excluded senior keyword 'architect' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Lead Developer — Rebuild, Modernize, & Scale (Social Good SaaS, Remote) at Track it Forward - Excluded senior keyword 'lead' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior React Native Developer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Solutions Engineer- LATAM at Fin - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Director, Channel & Partnerships at Prove - Excluded senior keyword 'director' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Managed SIEM Detection Engineer at Expel - Job title 'Managed SIEM Detection Engineer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Smartsheet Expert for Integrated Project Planning at Toptal - Job title 'Smartsheet Expert for Integrated Project Planning' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Power Platform Solutions Architect for Global Pharmaceutical Company at Toptal - Excluded senior keyword 'architect' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Customer Support Manager at Cribl - Excluded senior keyword 'manager' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] [PT/FT] Senior Roblox Developer & Game Designer at Toptal - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Full Stack at Toggl - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior React Full-stack Developer at Lemon.io - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Automation Engineer (UIPath) for innovative AI Project at Toptal - Job title 'Automation Engineer (UIPath) for innovative AI Project' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Mechanical Engineer at Toptal - Job title 'Mechanical Engineer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Software Development Engineer II Full Stack - Business (Remote @ Colombia) at OfferUp - Job title 'Software Development Engineer II Full Stack - Business (Remote @ Colombia)' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Software Engineer, remote at Edfinity - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Staff Software Engineer at Samsara - Excluded senior keyword 'staff' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] FULL TIME: Software Engineer Position - React and Rest at Yooli - Job title 'FULL TIME: Software Engineer Position - React and Rest' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Full-Stack Product Engineer - Agentic First at Wonderdog - Job title 'Full-Stack Product Engineer - Agentic First' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Software engineer at Sticker Mule - Job title 'Software engineer' does not match target Data Analytics/Junior Data Science roles.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Independent AI Engineer / Architect at A.Team - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Independent Software Developer ($90-$170/hr) at A.Team - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Shopify Developer (Remote + Flexible) at Storetasker - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at KP Law - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Jacobs - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at Scrumconnect Consulting - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Confidential - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Jacobs - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst (Army Collective Training) at Capita - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst - Growth at Wise - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst | Insurance Data & Analytics at Arthur Recruitment - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] BI Data Analyst at Motorway - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at Harnham - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Digital Data Analyst at AECOM - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at Universal Music Group UK - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at HiredBuddy - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Policy Expert - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Financial Crime Data Analyst at Financial Conduct Authority - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Performance and Data Analyst  (SEND) at Ealing Council (London Borough of Ealing) - Matched title pattern and junior level criteria with 4 core data skills (Data Cleaning, Python, Excel, Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at Universal Music Group - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at Consultancy.uk - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at Paritas Recruitment - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at Rakuten Viber - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst Trainee at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data analyst at Kingdom People - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at Netcom Online Learning - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at DVSA - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at DVSA - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [REJECT] Senior Data Analyst at DVSA - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data and AI Analyst at Digital Futures - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst Apprentice at QA - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Master Data Analyst Apprentice at Howdens Joinery - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst Apprentice at QA - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Investment Fund Data Analyst at Fitz Partners - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Insights Data Analyst Apprentice at QA - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] People Systems and Data Analyst at BPHA - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Penguin Recruitment Ltd - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Catalyst - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Trace | Expert Accountancy & Finance Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Nigel Wright Group - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Finlay Jude Associates Limited - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Forward Role - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Reed - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Hays Specialist Recruitment Limited - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Recruiit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Robert Half - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst Trainee at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Forward Role - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Elevation Recruitment Group - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Pure Resourcing Solutions - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Hays Specialist Recruitment Limited - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at TXP Technology x People - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Truespeed - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Artis Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Cathcart Technology - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Harnham - Data & Analytics Recruitment - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Addition - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Data Analyst at Agility - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [job_filter]: [ACCEPT] Trainee Data Analyst at ITOL Recruit - Matched title pattern and junior level criteria with 1 core data skills (Sql).
+[2026-09-23 08:34:00] [INFO] [workflow]: Filtered 137 jobs -> 58 accepted roles.
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at KP Law
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at KP Law (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Jacobs
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Jacobs (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Confidential
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Confidential (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Jacobs
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Jacobs (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for BI Data Analyst at Motorway
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for BI Data Analyst at Motorway (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at HiredBuddy
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at HiredBuddy (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Policy Expert
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Policy Expert (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Financial Crime Data Analyst at Financial Conduct Authority
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Financial Crime Data Analyst at Financial Conduct Authority (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Performance and Data Analyst  (SEND) at Ealing Council (London Borough of Ealing)
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Performance and Data Analyst  (SEND) at Ealing Council (London Borough of Ealing) (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst Trainee at ITOL Recruit
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst Trainee at ITOL Recruit (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data analyst at Kingdom People
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data analyst at Kingdom People (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Trainee Data Analyst at Netcom Online Learning
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Trainee Data Analyst at Netcom Online Learning (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data and AI Analyst at Digital Futures
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data and AI Analyst at Digital Futures (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst Apprentice at QA
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst Apprentice at QA (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Master Data Analyst Apprentice at Howdens Joinery
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Master Data Analyst Apprentice at Howdens Joinery (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst Apprentice at QA
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Junior Data Analyst Apprentice at QA (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Investment Fund Data Analyst at Fitz Partners
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Investment Fund Data Analyst at Fitz Partners (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Insights Data Analyst Apprentice at QA
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Insights Data Analyst Apprentice at QA (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for People Systems and Data Analyst at BPHA
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for People Systems and Data Analyst at BPHA (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Penguin Recruitment Ltd
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Penguin Recruitment Ltd (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Catalyst
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Catalyst (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Trace | Expert Accountancy & Finance Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Trace | Expert Accountancy & Finance Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Nigel Wright Group
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Nigel Wright Group (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Finlay Jude Associates Limited
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Finlay Jude Associates Limited (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Forward Role
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Forward Role (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Reed
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Reed (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Hays Specialist Recruitment Limited
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Hays Specialist Recruitment Limited (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Recruiit
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Recruiit (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Robert Half
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Robert Half (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst Trainee at ITOL Recruit
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst Trainee at ITOL Recruit (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Forward Role
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Forward Role (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Elevation Recruitment Group
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Elevation Recruitment Group (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Pure Resourcing Solutions
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Pure Resourcing Solutions (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Hays Specialist Recruitment Limited
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Hays Specialist Recruitment Limited (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at TXP Technology x People
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at TXP Technology x People (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Truespeed
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Truespeed (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Artis Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Artis Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Cathcart Technology
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Cathcart Technology (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Harnham - Data & Analytics Recruitment
+[2026-09-23 08:34:00] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Harnham - Data & Analytics Recruitment (Follow-up: 2026-09-30)
+[2026-09-23 08:34:00] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Addition
+[2026-09-23 08:34:01] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Addition (Follow-up: 2026-09-30)
+[2026-09-23 08:34:01] [INFO] [form_filler]: Generated form submission payload for Data Analyst at Agility
+[2026-09-23 08:34:01] [INFO] [tracker]: Logged application [SUBMITTED] for Data Analyst at Agility (Follow-up: 2026-09-30)
+[2026-09-23 08:34:01] [INFO] [form_filler]: Generated form submission payload for Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [tracker]: Logged application [SUBMITTED] for Trainee Data Analyst at ITOL Recruit (Follow-up: 2026-09-30)
+[2026-09-23 08:34:01] [INFO] [workflow]: Skipping already processed job Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [workflow]: Skipping already processed job Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [workflow]: Skipping already processed job Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [workflow]: Skipping already processed job Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [workflow]: Skipping already processed job Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [workflow]: Skipping already processed job Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [workflow]: Skipping already processed job Trainee Data Analyst at ITOL Recruit
+[2026-09-23 08:34:01] [INFO] [workflow]: Workflow completed. Processed 51 applications successfully.
+[2026-09-23 18:07:34] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at A - Matched fresher-friendly title pattern (Junior Data Analyst) with 2 core data skills (Python, Sql).
+[2026-09-23 18:07:34] [INFO] [job_filter]: [REJECT] Principal Architect at B - Excluded senior keyword 'principal' found in job title.
+[2026-09-23 18:07:34] [INFO] [job_filter]: [REJECT] Data Scientist at C - Excluded high experience requirement '5+ years' found in job description.
+[2026-09-23 18:07:34] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 18:07:34] [INFO] [job_sources]: Fetching UK jobs from LinkedIn (keywords='data analyst', location='United Kingdom')
+[2026-09-23 18:07:35] [INFO] [job_sources]: Fetched 10 jobs from LinkedIn UK.
+[2026-09-23 18:07:35] [INFO] [job_sources]: Fetching UK jobs from Indeed (keywords='data analyst', location='United Kingdom')
+[2026-09-23 18:07:35] [WARNING] [job_sources]: Indeed UK request returned status 403
+[2026-09-23 18:07:35] [INFO] [job_sources]: Fetched 0 jobs from Indeed UK.
+[2026-09-23 18:07:35] [INFO] [job_sources]: Fetching UK jobs from Reed.co.uk (keywords='data analyst')
+[2026-09-23 18:07:36] [INFO] [job_sources]: Fetched 27 jobs from Reed.co.uk.
+[2026-09-23 18:07:36] [INFO] [job_sources]: Fetching UK jobs from TotalJobs (keywords='data analyst')
+[2026-09-23 18:07:38] [INFO] [job_sources]: Fetched 0 jobs from TotalJobs.
+[2026-09-23 18:07:38] [INFO] [job_sources]: Fetching UK jobs from CV-Library (keywords='data analyst')
+[2026-09-23 18:07:38] [WARNING] [job_sources]: CV-Library returned status 403
+[2026-09-23 18:07:38] [INFO] [job_sources]: Fetched 0 jobs from CV-Library.
+[2026-09-23 18:07:39] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 18:07:39] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-23 18:07:39] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 18:07:39] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 18:07:39] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched fresher-friendly title pattern (Junior Data Analyst) with 6 core data skills (Python, Eda, Power Bi, Data Cleaning).
+[2026-09-23 18:07:39] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched fresher-friendly title pattern (Graduate Data Scientist) with 5 core data skills (Python, Statistics, Ml Basics, Sql).
+[2026-09-23 18:07:39] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 18:07:39] [INFO] [workflow]: Filtered 3 jobs -> 2 accepted roles.
+[2026-09-23 18:07:39] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-23 18:07:39] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-23 18:07:39] [INFO] [workflow]: Workflow completed. Processed 2 applications successfully.
+[2026-09-23 18:07:56] [INFO] [tracker]: Loaded 54 tracked applications from data/applications_tracker.json
+[2026-09-23 18:07:56] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-23 18:07:56] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 18:07:56] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 18:07:56] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at TechMetrics Ltd - Matched fresher-friendly title pattern (Junior Data Analyst) with 6 core data skills (Power Bi, Sql, Excel, Data Cleaning).
+[2026-09-23 18:07:56] [INFO] [job_filter]: [ACCEPT] Graduate Data Scientist at AI Insights Labs - Matched fresher-friendly title pattern (Graduate Data Scientist) with 5 core data skills (Exploratory Data Analysis, Sql, Statistics, Python).
+[2026-09-23 18:07:56] [INFO] [job_filter]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 18:07:56] [INFO] [job_filter]: [ACCEPT] Business Analyst (Data & Insights) at Fintech Solutions - Matched fresher-friendly title pattern (Business Analyst (Data & Insights)) with 3 core data skills (Sql, Tableau, Data Cleaning).
+[2026-09-23 18:07:56] [INFO] [workflow]: Filtered 4 jobs -> 3 accepted roles.
+[2026-09-23 18:07:56] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-23 18:07:56] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-23 18:07:56] [INFO] [form_filler]: Generated form submission payload for Business Analyst (Data & Insights) at Fintech Solutions
+[2026-09-23 18:07:56] [INFO] [workflow]: Workflow completed. Processed 3 applications successfully.
