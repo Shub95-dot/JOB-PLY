@@ -14,9 +14,9 @@ def main():
     parser.add_argument(
         "--source",
         type=str,
-        default="remotive",
-        choices=["mock", "remotive", "rss", "all"],
-        help="Job source provider (choices: mock, remotive, rss, all. default: remotive)"
+        default="all",
+        choices=["mock", "remotive", "rss", "linkedin", "indeed", "reed", "totaljobs", "cvlibrary", "all"],
+        help="Job source provider (choices: mock, remotive, rss, linkedin, indeed, reed, totaljobs, cvlibrary, all. default: all)"
     )
     parser.add_argument(
         "--dry-run",

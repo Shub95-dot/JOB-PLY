@@ -1,16 +1,18 @@
-name: "Shubham"
+name: "Shubham S. Shirodkar"
 contact:
-  email: "shubham@example.com"
-  phone: "+44 7123 456789"
-  location: "United Kingdom"
-  linkedin: "https://linkedin.com/in/shubham-data"
-  github: "https://github.com/shubham-data"
+  phone: "+44 7721 708679"
+  email: "shirodkarshubham9@gmail.com"
+location: "United Kingdom"
+linkedin: "https://linkedin.com/in/shubham-data"
+github: "https://github.com/Shub95-dot"
 
 education:
-  - degree: "B.Sc. / M.Sc. in Data Science & Applied AI"
-    institution: "University"
-    graduation_year: 2024
-    details: "Focused on Applied AI, Machine Learning, Statistical Analysis, Data Engineering, and Exploratory Data Analysis."
+  - degree: "MSc Artificial Intelligence & Data Science"
+    institution: "Solent University"
+    graduation_year: 2026
+    details: >
+      Published research in clinical risk classification. Coursework includes machine learning,
+      deep learning, statistical analysis, data engineering, and exploratory data analysis.
 
 skills:
   - "Python"
@@ -25,23 +27,51 @@ skills:
   - "Pandas"
   - "NumPy"
   - "Scikit-Learn"
+  - "XGBoost"
+  - "LightGBM"
+  - "LSTM"
+  - "TCN"
+  - "Transformer Models"
+  - "OpenCV"
+  - "MediaPipe"
+  - "FastAPI"
+  - "Streamlit"
+  - "GitHub Actions"
+  - "Git"
+  - "Jupyter"
 
 projects:
-  - title: "Maternal Health Risk Analysis & Prediction"
-    tech_stack: ["Python", "SQL", "Scikit-Learn", "EDA", "Power BI"]
-    description: "Performed end-to-end exploratory data analysis and predictive modeling on maternal health risk datasets. Cleaned raw clinical data, conducted hypothesis testing, built supervised classification models, and developed interactive dashboards to communicate clinical insights."
-  - title: "Automated Job Search & Application Intelligence Engine"
-    tech_stack: ["Python", "Pydantic", "PyYAML", "BeautifulSoup4", "REST APIs"]
-    description: "Architected a production-grade automated pipeline to aggregate, filter, and score job descriptions using NLP and ATS keyword matching algorithms for data analytics and science roles."
+  - title: "Maternal Health Risk Prediction (Published Research)"
+    tech_stack: ["Python", "Scikit-Learn", "XGBoost", "LightGBM", "SMOTE", "Tableau"]
+    description: >
+      Built a Voting Ensemble classifier achieving 0.889 macro recall and 0.857–0.858
+      cross-validated recall using StratifiedKFold + SMOTE. Delivered a Tableau dashboard
+      and reviewer-response document.
+
+  - title: "SOLiGence Barometer Ensemble System"
+    tech_stack: ["Python", "LightGBM", "XGBoost", "TCN", "FastAPI", "Streamlit", "GitHub Actions"]
+    description: >
+      Multi-model forecasting system using BILSTM, XGBoost, TCN, and TFT-Lite with a LightGBM
+      meta-learner and FinBERT sentiment pipeline. Deployed via FastAPI/Streamlit with CI/CD.
+
+  - title: "Sensorless Markerless Athlete Injury-Risk Screening"
+    tech_stack: ["Python", "OpenCV", "MediaPipe", "XAI"]
+    description: >
+      Video-based biomechanical screening system validated against OpenCap data. Built
+      uncertainty-weighted rule-based screening and counterfactual explainability module.
+
+  - title: "Customer Churn Prediction Model"
+    tech_stack: ["Python", "Pandas", "Scikit-Learn"]
+    description: "Built classification pipeline with feature engineering, model selection, and evaluation."
 
 experience:
   - role: "Junior Data Analyst / Project Intern"
     company: "Data Solutions Lab"
     duration: "2023 - 2024"
     highlights:
-      - "Analyzed structured relational databases using SQL to extract actionable business metrics and customer cohorts."
-      - "Developed automated Python scripts for data cleaning, transformation, and validation, cutting data preprocessing time by 40%."
-      - "Designed interactive Power BI and Tableau dashboards tracking core KPI metrics for cross-functional stakeholders."
+      - "Analyzed relational databases using SQL to extract actionable business metrics."
+      - "Developed automated Python scripts for data cleaning and transformation."
+      - "Built Power BI and Tableau dashboards for KPI tracking."
 
 preferences:
   target_roles:

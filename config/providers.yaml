@@ -15,6 +15,30 @@ job_sources:
     endpoints:
       - "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss"
       - "https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss"
+  linkedin:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data analyst"
+    endpoint: "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
+  indeed:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data analyst"
+    endpoint: "https://uk.indeed.com/jobs"
+  reed:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data analyst"
+    endpoint: "https://www.reed.co.uk/jobs"
+  totaljobs:
+    enabled: true
+    location: "united-kingdom"
+    keywords: "data analyst"
+    endpoint: "https://www.totaljobs.com/jobs"
+  cvlibrary:
+    enabled: true
+    location: "United Kingdom"
+    keywords: "data analyst"
+    endpoint: "https://www.cv-library.co.uk/search-jobs"
   mock:
     enabled: true
-
