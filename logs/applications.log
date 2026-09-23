@@ -1581,3 +1581,28 @@ TypeError: unhashable type: 'slice'
 [2026-09-23 20:33:42] [INFO] [form_filler]: Generated form submission payload for Data Technician (On-site) at Adzuna Employer
 [2026-09-23 20:33:42] [INFO] [form_filler]: Generated form submission payload for Reporting Analyst (On-site) at UK Financial Services
 [2026-09-23 20:33:42] [INFO] [workflow]: Workflow completed. Processed 198 applications successfully.
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: Email sent successfully: 'Test Subject' to shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [email_notifier]: EmailNotifier configured for shirodkars127@gmail.com -> shirodkars127@gmail.com
+[2026-09-23 20:45:25] [INFO] [workflow]: Starting ApplicationWorkflow (source=mock, dry_run=True)
+[2026-09-23 20:45:25] [INFO] [profile_manager]: Loaded profile for Shubham S. Shirodkar
+[2026-09-23 20:45:25] [INFO] [job_sources]: Fetching jobs from MockJobSource.
+[2026-09-23 20:45:25] [INFO] [workflow]: [REJECT] Senior Data Engineering Manager at Global Cloud Corp - Excluded senior keyword 'senior' found in job title.
+[2026-09-23 20:45:26] [ERROR] [email_notifier]: Failed to send email '🛡️ [JOB-PLY] Filtered Out: Senior Data Engineering Manager at Global Cloud Corp': (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5b1f17b1804b1-49fe5de187asm8576095e9.7 - gsmtp')
+[2026-09-23 20:45:26] [INFO] [workflow]: Filtered 3 jobs -> 2 accepted roles.
+[2026-09-23 20:45:26] [INFO] [form_filler]: Generated form submission payload for Junior Data Analyst at TechMetrics Ltd
+[2026-09-23 20:45:27] [ERROR] [email_notifier]: Failed to send email '🎯 [JOB-PLY] Applied: Junior Data Analyst at TechMetrics Ltd': (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ffacd0b85a97d-48868486461sm8870073f8f.8 - gsmtp')
+[2026-09-23 20:45:27] [INFO] [form_filler]: Generated form submission payload for Graduate Data Scientist at AI Insights Labs
+[2026-09-23 20:45:27] [ERROR] [email_notifier]: Failed to send email '🎯 [JOB-PLY] Applied: Graduate Data Scientist at AI Insights Labs': (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials 5b1f17b1804b1-49fe667ae2fsm6978385e9.13 - gsmtp')
+[2026-09-23 20:45:27] [INFO] [workflow]: Workflow completed. Processed 2 applications successfully.
+[2026-09-23 20:45:28] [ERROR] [email_notifier]: Failed to send email '📊 [JOB-PLY Daily Report] Applied: 2 | Fetched: 3': (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ffacd0b85a97d-4886876c267sm8992763f8f.16 - gsmtp')
+[2026-09-23 20:45:28] [INFO] [job_filter]: [ACCEPT] Junior Data Analyst at A - Matched fresher-friendly title pattern (Junior Data Analyst) with 2 core data skills (Sql, Python).
+[2026-09-23 20:45:28] [INFO] [job_filter]: [REJECT] Principal Architect at B - Excluded senior keyword 'principal' found in job title.
+[2026-09-23 20:45:28] [INFO] [job_filter]: [REJECT] Data Scientist at C - Excluded high experience requirement '5+ years' found in job description.

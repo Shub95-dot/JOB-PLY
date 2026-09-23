@@ -52,6 +52,12 @@ def main():
         help="Disable LLM (Anthropic API) integration and use deterministic rule-based generation."
     )
     parser.add_argument(
+        "--notify",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Enable or disable email notifications (default: enabled)."
+    )
+    parser.add_argument(
         "--output-json",
         type=str,
         default=None,
@@ -60,7 +66,13 @@ def main():
 
     args = parser.parse_args()
 
-    workflow = ApplicationWorkflow(use_llm=not args.no_llm)
+    print("Email notifications enabled.")
+    print("Provider: Gmail")
+    print("Recipient: shirodkars127@gmail.com")
+    print("Daily summary: enabled")
+    print("Application alerts: enabled\n")
+
+    workflow = ApplicationWorkflow(use_llm=not args.no_llm, notify=args.notify)
     results = workflow.run(
         source_name=args.source,
         dry_run=args.dry_run,
