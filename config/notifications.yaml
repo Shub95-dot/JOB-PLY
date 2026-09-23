@@ -1,8 +1,10 @@
 provider: "gmail"
 smtp_host: "smtp.gmail.com"
 smtp_port: 587
+
 username: "shirodkars127@gmail.com"
-password: "rijhyg-7sujmi-jEwber"
+password: "${GMAIL_APP_PASSWORD}"
+
 recipient_email: "shirodkars127@gmail.com"
 
 enable_application_alerts: true

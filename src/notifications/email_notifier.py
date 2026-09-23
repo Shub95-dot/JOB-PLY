@@ -39,7 +39,21 @@ class EmailNotifier:
             self.smtp_host = config.get("smtp_host", "smtp.gmail.com")
             self.smtp_port = int(config.get("smtp_port", 587))
             self.username = config.get("username", "")
-            self.password = config.get("password", "")
+
+            pwd_cfg = str(config.get("password", "")).strip()
+            # Resolve password from environment variable if placeholder or env reference
+            env_pwd = os.environ.get("GMAIL_APP_PASSWORD") or os.environ.get("SMTP_PASSWORD")
+            if env_pwd:
+                self.password = env_pwd
+            elif not pwd_cfg or pwd_cfg.startswith("${") or "YOUR_" in pwd_cfg:
+                self.password = env_pwd or ""
+            else:
+                self.password = pwd_cfg
+
+            # Clean whitespace from Gmail app password
+            if self.password:
+                self.password = self.password.replace(" ", "")
+
             self.recipient_email = config.get("recipient_email", self.username)
 
             self.enable_application_alerts = config.get("enable_application_alerts", True)
@@ -70,15 +84,27 @@ class EmailNotifier:
             if html_body:
                 msg.attach(MIMEText(html_body, "html", "utf-8"))
 
-            with smtplib.SMTP(self.smtp_host, self.smtp_port, timeout=15) as server:
-                server.starttls()
-                server.login(self.username, self.password)
-                server.send_message(msg)
+            if self.smtp_port == 465:
+                with smtplib.SMTP_SSL(self.smtp_host, self.smtp_port, timeout=15) as server:
+                    server.login(self.username, self.password)
+                    server.send_message(msg)
+            else:
+                with smtplib.SMTP(self.smtp_host, self.smtp_port, timeout=15) as server:
+                    server.starttls()
+                    server.login(self.username, self.password)
+                    server.send_message(msg)
 
             logger.info(f"Email sent successfully: '{subject}' to {self.recipient_email}")
             return True
         except Exception as e:
-            logger.error(f"Failed to send email '{subject}': {e}")
+            err_str = str(e)
+            if "5.7.14" in err_str or "DisplayUnlockCaptcha" in err_str:
+                logger.error(
+                    f"Gmail SMTP authentication requires a one-time device unlock. "
+                    f"Please visit https://accounts.google.com/DisplayUnlockCaptcha in your browser while logged into {self.username}."
+                )
+            else:
+                logger.error(f"Failed to send email '{subject}': {e}")
             return False
 
     def send_application_alert(self, job_data: Dict[str, Any], status: str = "applied") -> bool:
