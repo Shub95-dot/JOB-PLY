@@ -6,7 +6,7 @@
 **ATS Score**: 66%
 
 ## Required Core Skills
-Ml Basics, Statistics, Exploratory Data Analysis, Sql, Python
+Sql, Ml Basics, Statistics, Exploratory Data Analysis, Python
 
 ## Required Tools
 SQL, Python

@@ -6,7 +6,7 @@
 **ATS Score**: 80%
 
 ## Required Core Skills
-Sql, Python, Data Cleaning, Eda, Power Bi, Excel
+Sql, Power Bi, Excel, Eda, Data Cleaning, Python
 
 ## Required Tools
 SQL, Python, Power BI, Excel

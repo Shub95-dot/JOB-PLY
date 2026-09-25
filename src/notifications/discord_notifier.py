@@ -5,6 +5,7 @@ import json
 import logging
 from datetime import datetime
 from typing import Dict, Any, Optional, List
+import time
 import requests
 from src.core.utils import setup_logger, load_yaml
 
@@ -50,28 +51,39 @@ class DiscordNotifier:
         else:
             logger.info("DiscordNotifier configured with valid webhook URL.")
 
-    def send_webhook(self, payload: Dict[str, Any]) -> bool:
-        """Send JSON payload to configured Discord webhook."""
+    def send_webhook(self, payload: Dict[str, Any], retries: int = 3) -> bool:
+        """Send JSON payload to configured Discord webhook with rate-limit retry support."""
         if not self.enabled or not self.webhook_url:
             logger.debug("DiscordNotifier disabled or missing webhook URL. Skipping webhook delivery.")
             return False
 
-        try:
-            response = requests.post(
-                self.webhook_url,
-                json=payload,
-                headers={"Content-Type": "application/json"},
-                timeout=10
-            )
-            if response.status_code in [200, 204]:
-                logger.info("Discord webhook sent successfully.")
-                return True
-            else:
-                logger.error(f"Failed to send Discord webhook: HTTP {response.status_code} - {response.text}")
+        for attempt in range(retries):
+            try:
+                response = requests.post(
+                    self.webhook_url,
+                    json=payload,
+                    headers={"Content-Type": "application/json"},
+                    timeout=10
+                )
+                if response.status_code in [200, 204]:
+                    logger.info("Discord webhook sent successfully.")
+                    return True
+                elif response.status_code == 429:
+                    try:
+                        resp_json = response.json()
+                        retry_after = float(resp_json.get("retry_after", 1.0))
+                    except Exception:
+                        retry_after = 1.0
+                    logger.warning(f"Discord rate limit hit (HTTP 429). Retrying after {retry_after:.2f}s... (Attempt {attempt + 1}/{retries})")
+                    time.sleep(retry_after + 0.1)
+                else:
+                    logger.error(f"Failed to send Discord webhook: HTTP {response.status_code} - {response.text}")
+                    return False
+            except Exception as e:
+                logger.error(f"Error sending Discord webhook: {e}")
                 return False
-        except Exception as e:
-            logger.error(f"Error sending Discord webhook: {e}")
-            return False
+
+        return False
 
     def send_application_alert(
         self,
