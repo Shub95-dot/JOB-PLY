@@ -2,8 +2,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Environments
+# Environments & Secrets
 .env
+*.env
+.env.local
+credentials.json
+secrets.yaml
 .venv
 env/
 venv/
@@ -14,8 +18,10 @@ ENV/
 .coverage
 htmlcov/
 
-# Local databases
+# Local databases & logs
 data/applications_tracker.json
+logs/*.log
+*.log
 
 # IDE
 .vscode/

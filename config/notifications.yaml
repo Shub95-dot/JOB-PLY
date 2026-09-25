@@ -1,12 +1,9 @@
-provider: "gmail"
-smtp_host: "smtp.gmail.com"
-smtp_port: 587
-
-username: "shirodkars127@gmail.com"
-password: "${GMAIL_APP_PASSWORD}"
-
-recipient_email: "shirodkars127@gmail.com"
+provider: "discord"
 
 enable_application_alerts: true
+enable_duplicate_alerts: true
+enable_rejection_alerts: true
 enable_daily_summary: true
 enable_weekly_summary: true
+enable_interview_prep_alerts: true
+enable_error_alerts: true

@@ -1,12 +1,37 @@
 """CLI Entry point for job-app-agent."""
 
+import os
 import argparse
 import json
 import sys
+from dotenv import load_dotenv
 from src.application.workflow import ApplicationWorkflow
 from src.core.utils import setup_logger
 
+load_dotenv()
+
 logger = setup_logger("main")
+
+
+def validate_environment():
+    """Validates required environment variables at startup and prints status."""
+    print("=========================================")
+    print("STARTUP ENVIRONMENT VALIDATION")
+    print("=========================================")
+
+    discord_webhook = os.environ.get("DISCORD_APPLICATIONS_WEBHOOK")
+    anthropic_key = os.environ.get("ANTHROPIC_API_KEY")
+
+    if discord_webhook:
+        print("[OK] Discord webhook loaded")
+    else:
+        print("[WARNING] Missing variable: DISCORD_APPLICATIONS_WEBHOOK")
+
+    if anthropic_key:
+        print("[OK] Anthropic key loaded")
+    else:
+        print("[WARNING] Missing variable: ANTHROPIC_API_KEY")
+    print("=========================================\n")
 
 
 def main():
@@ -55,7 +80,7 @@ def main():
         "--notify",
         action=argparse.BooleanOptionalAction,
         default=True,
-        help="Enable or disable email notifications (default: enabled)."
+        help="Enable or disable notifications (default: enabled)."
     )
     parser.add_argument(
         "--output-json",
@@ -66,13 +91,18 @@ def main():
 
     args = parser.parse_args()
 
-    print("Email notifications enabled.")
-    print("Provider: Gmail")
-    print("Recipient: shirodkars127@gmail.com")
-    print("Daily summary: enabled")
-    print("Application alerts: enabled\n")
+    validate_environment()
 
     workflow = ApplicationWorkflow(use_llm=not args.no_llm, notify=args.notify)
+
+    if args.notify and workflow.discord_notifier.enabled:
+        print("Discord notifications enabled.")
+        print("Webhook: Loaded successfully")
+        print(f"Daily summary: {'enabled' if workflow.discord_notifier.enable_daily_summary else 'disabled'}")
+        print(f"Application alerts: {'enabled' if workflow.discord_notifier.enable_application_alerts else 'disabled'}\n")
+    else:
+        print("Discord notifications disabled (webhook missing or --no-notify).\n")
+
     results = workflow.run(
         source_name=args.source,
         dry_run=args.dry_run,

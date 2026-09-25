@@ -14,6 +14,7 @@ Built following strict software engineering best practices: Pydantic domain mode
 ```text
 job-app-agent/
   README.md
+  .env.example           # Example environment variables template
   pyproject.toml
   requirements.txt
   main.py
@@ -21,32 +22,32 @@ job-app-agent/
   config/
     settings.yaml        # App, retry, and LLM configuration
     providers.yaml       # API provider keys and endpoints
+    notifications.yaml   # Email notifier settings (no hardcoded secrets)
     filters.yaml         # Deterministic filter criteria (titles, levels, skills, exclusions)
     user_profile.yaml    # Candidate profile (Shubham's education, skills, projects, experience)
 
   src/
     core/
-      __init__.py
       models.py          # Pydantic models (Job, Profile, ResumeVersion, CoverLetter, ApplicationLog, WorkflowJobResult)
       utils.py           # Logging, retries, text cleaning, word counting
 
     data/
-      __init__.py
       profile_manager.py # Load/update user profile data
       resume_builder.py  # ATS resume tailoring & match scoring (0.0 to 1.0)
       cover_letter.py    # Custom cover letter generator (150-220 words)
 
     jobs/
-      __init__.py
       job_sources.py     # Free job APIs (Remotive) & Mock test sources
       job_scraper.py     # HTML/JSON parsing with BeautifulSoup4
       job_filter.py      # Deterministic filtering logic
 
     application/
-      __init__.py
       form_filler.py     # Maps candidate details to application portal fields
       workflow.py        # End-to-end apply flow orchestrator
       tracker.py         # Application database logger & duplicate prevention
+
+    notifications/
+      email_notifier.py  # Outlook/Office 365 & Gmail SMTP alerts via env vars
 
   logs/
     applications.log     # Detailed workflow log entries
@@ -57,12 +58,13 @@ job-app-agent/
     test_filters.py
     test_resume_builder.py
     test_cover_letter.py
+    test_email_notifications.py
     test_workflow.py
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started & Secure Setup
 
 ### 1. Installation
 
@@ -72,17 +74,37 @@ Install dependencies using `pip`:
 pip install -r requirements.txt
 ```
 
-### 2. Configuration & API Keys (Optional)
+### 2. Secure Environment Configuration (`.env`)
 
-- Set your Anthropic Claude API key to enable LLM-powered resume tailoring and cover letter generation:
+Never commit real API keys, email addresses, or passwords to git. Create a local `.env` file based on `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Populate your local `.env` file:
+
+```env
+OUTLOOK_EMAIL="your_email@outlook.com"
+OUTLOOK_PASSWORD="your_outlook_app_password"
+RECIPIENT_EMAIL="your_recipient@example.com"
+ANTHROPIC_API_KEY="your_optional_anthropic_claude_api_key"
+```
+
+*Note*: If `ANTHROPIC_API_KEY` is not provided or `--no-llm` is passed, the agent uses a deterministic NLP tailoring pipeline.
+
+---
+
+## 🔒 Public GitHub Security Guidance
+
+This repository is configured for public GitHub deployment:
+- **No Hardcoded Secrets**: Credentials, email addresses, and API keys are loaded exclusively from local environment variables using `python-dotenv`.
+- **Git Ignore Safeguards**: `.env`, `*.env`, `.env.local`, `credentials.json`, `secrets.yaml`, and tracker data files are strictly git-ignored.
+- **Git History Auditing**: Always verify git commit history for sensitive tokens prior to pushing to public remotes:
   ```bash
-  # Windows PowerShell
-  $env:ANTHROPIC_API_KEY="your-api-key-here"
-
-  # Linux / macOS
-  export ANTHROPIC_API_KEY="your-api-key-here"
+  git log -p | grep -i "password"
   ```
-- *Note*: If `ANTHROPIC_API_KEY` is not set or `--no-llm` is passed, the agent seamlessly uses a high-precision deterministic NLP pipeline.
+  If any secret was historically committed, revoke the credential immediately and purge it from history using `git filter-repo`.
 
 ---
 

@@ -1,4 +1,4 @@
 """Notifications package."""
-from .email_notifier import EmailNotifier
+from .discord_notifier import DiscordNotifier
 
-__all__ = ["EmailNotifier"]
+__all__ = ["DiscordNotifier"]
