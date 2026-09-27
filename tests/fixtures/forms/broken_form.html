@@ -1,0 +1,4 @@
+<!doctype html><html><body><form id="application-form" onsubmit="event.preventDefault();document.querySelector('[name=email]').setAttribute('aria-invalid','true');document.body.insertAdjacentHTML('beforeend','<p>There was an error submitting your application</p>');">
+<label>Full name ✱<input name="name" required></label><label>Email ✱<input name="email" type="email" required></label>
+<label>Resume ✱<input type="file" name="resume" required></label>
+<button id="btn-submit" type="submit">Submit application</button></form></body></html>

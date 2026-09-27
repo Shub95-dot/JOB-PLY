@@ -1,26 +1,38 @@
-app:
-  name: "job-app-agent"
-  version: "0.1.0"
-  environment: "development"
+# Nothing is submitted until this is true. Set it only after checking that
+# config/user_profile.yaml and config/answers.yaml are accurate.
+profile_reviewed: false
 
-paths:
-  logs_dir: "logs"
-  applications_log: "logs/applications.log"
-  errors_log: "logs/errors.log"
-  tracker_db: "data/applications_tracker.json"
-  user_profile: "config/user_profile.yaml"
+# Your real CV (PDF). This exact file is uploaded to every application.
+cv_path: "data/Shubham_Shirodkar_CV.pdf"
 
-retry:
-  max_retries: 3
-  backoff_factor: 1.5
+apply:
+  daily_cap: 15                               # max VERIFIED submissions per day
+  min_score: 0.35                             # relevance threshold (0–1) to shortlist a job
+  headless: false                             # true for scheduled/unattended runs
+  delay_between_applications_seconds: [25, 70]
+  confirmation_timeout_seconds: 25
+
+follow_up_days: 7
+
+notifications:
+  discord:                                    # webhook URL goes in .env as DISCORD_WEBHOOK_URL
+    enabled: true
+    applied: true                             # one message per verified application
+    needs_you: true                           # jobs it couldn't apply to, with the reason
+    failed: true                              # submitted but no confirmation page
+    summary: true                             # totals at the end of each run
+    errors: true                              # a source or the run crashed
+    interview_prep: true                      # a prep guide was written
+    mention_user_id: ""                       # your Discord user ID to get @-pinged for needs_you/errors
+
+interview_prep:
+  enabled: true                               # guide per verified application -> data/interview_prep/
 
 llm:
-  default_provider: "anthropic"
-  model: "claude-3-5-sonnet-20241022"
-  temperature: 0.3
-  max_tokens: 1000
+  model: "claude-sonnet-5"                    # cover letters; needs ANTHROPIC_API_KEY. Template used otherwise.
 
-cover_letter:
-  min_words: 150
-  max_words: 220
-  default_tone: "professional"
+paths:
+  db: "data/tracker.db"
+  evidence: "data/evidence"
+  digest: "data/digest"
+  browser_profile: "data/browser_profile"

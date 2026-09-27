@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Acme - Graduate Data Analyst</title></head><body>
+<h2>Graduate Data Analyst</h2>
+<form id="application-form" onsubmit="return go(event)">
+ <div class="application-question"><label><div class="application-label">Resume/CV<span class="required">✱</span></div>
+   <input type="file" name="resume" id="resume-upload-input" required></label></div>
+ <div class="application-question"><label><div class="application-label">Full name<span class="required">✱</span></div><input type="text" name="name" required></label></div>
+ <div class="application-question"><label><div class="application-label">Email<span class="required">✱</span></div><input type="email" name="email" required></label></div>
+ <div class="application-question"><label><div class="application-label">Phone</div><input type="text" name="phone"></label></div>
+ <div class="application-question"><label><div class="application-label">Current company</div><input type="text" name="org"></label></div>
+ <div class="application-question"><label><div class="application-label">LinkedIn URL</div><input type="text" name="urls[LinkedIn]"></label></div>
+ <div class="application-question"><label><div class="application-label">GitHub URL</div><input type="text" name="urls[GitHub]"></label></div>
+ <div class="application-question custom-question">
+   <div class="application-label">Do you have the right to work in the UK?<span class="required">✱</span></div>
+   <ul><li><label><input type="radio" name="cards[abc][field0]" value="Yes" required> Yes</label></li>
+       <li><label><input type="radio" name="cards[abc][field0]" value="No"> No</label></li></ul></div>
+ <div class="application-question custom-question">
+   <div class="application-label">What gender do you identify as?</div>
+   <select name="eeo[gender]"><option value="">Select ...</option><option>Male</option><option>Female</option><option>Decline to self-identify</option></select></div>
+ <div class="application-question"><label><div class="application-label">Additional information</div><textarea name="comments"></textarea></label></div>
+ <div><label><input type="checkbox" name="consent[store]" required> I agree to the privacy policy✱</label></div>
+ <button type="submit" id="btn-submit">Submit application</button>
+</form>
+<script>
+function go(e){ e.preventDefault();
+  const f=document.getElementById('application-form');
+  if(!f.checkValidity()){document.body.insertAdjacentHTML('beforeend','<p class=err>Please complete all required fields</p>');return false;}
+  const d={}; new FormData(f).forEach((v,k)=>{d[k]= (v instanceof File)? v.name : v}); localStorage.setItem('last', JSON.stringify(d));
+  setTimeout(()=>{location.href='lever_thanks.html'},400); return false;}
+</script></body></html>

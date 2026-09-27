@@ -1,87 +1,195 @@
+# Hard filters — every rejection is stored with its reason (python main.py show KEY).
+
+# Title must contain one of these (lower-case substring match)
 include_titles:
   - "data analyst"
-  - "junior data analyst"
-  - "graduate data analyst"
   - "reporting analyst"
+  - "insight analyst"
   - "insights analyst"
   - "bi analyst"
+  - "business intelligence analyst"
   - "mi analyst"
-  - "analytics engineer"
+  - "management information analyst"
+  - "analytics analyst"
   - "data scientist"
-  - "junior data scientist"
-  - "graduate data scientist"
-  - "data technician"
-  - "data associate"
-  - "data coordinator"
-  - "data operations analyst"
-  - "business analyst"
+  - "junior analytics engineer"
+  - "graduate analytics engineer"
   - "junior analyst"
+  - "graduate analyst"
+  - "data & insight"
+  - "data and insight"
+  - "commercial analyst"
+  - "performance analyst"
+  - "operations analyst"
+  - "data analytics"
 
-allowed_levels:
-  - "entry-level"
-  - "entry level"
-  - "fresher"
-  - "junior"
-  - "graduate"
-  - "trainee"
-  - "associate"
-  - "intern"
-  - "training provided"
-  - "mentorship available"
-  - "no experience required"
-  - "experience preferred"
-  - "experience desirable"
-  - "experience beneficial"
-  - "some experience"
-  - "exposure to analytics"
-  - "0-1 year"
-  - "0-2 years"
-  - "1-2 years"
-  - "0 years"
-  - "1 year"
-  - "2 years"
+# Whole words in the title that exclude a job
+exclude_title_words:
+  - "senior"
+  - "snr"
+  - "sr"
+  - "lead"
+  - "principal"
+  - "manager"
+  - "head"
+  - "director"
+  - "architect"
+  - "staff"
+  - "vp"
+  - "ii"
+  - "iii"
+  - "iv"
+  - "contract"
+  - "freelance"
 
-preferred_skills:
+# Phrases in the title that exclude a job
+exclude_title_phrases:
+  - "data entry"
+  - "clerk"
+  - "annotator"
+  - "annotation"
+  - "labeling"
+  - "labelling"
+  - "panelist"
+  - "survey"
+  - "customer service"
+  - "no experience needed - training"
+  - "trainee data analyst"      # almost always a paid training course (ITOL, Netcom...), not a job
+  - "career change"
+  - "phd"
+
+exclude_companies:
+  - "itol recruit"
+  - "netcom training"
+  - "just it"
+  - "jobsinmass"
+  - "remotehunter"
+  - "apexfocusgroup"
+
+exclude_description_phrases:
+  - "course fee"
+  - "training fee"
+  - "funded training programme"
+  - "upfront payment"
+  - "security clearance required"
+  - "sc clearance"
+  - "dv clearance"
+  - "must hold active clearance"
+
+max_years_experience: 2
+
+allowed_work_types: ["remote", "hybrid", "on-site", "unspecified"]
+
+# ---------------------------------------------------------------------------
+# LOCATION RULES
+#   Remote   -> anywhere in the world, unless the posting only hires from regions
+#               that exclude the UK ("US only", "Canada", "LATAM"...).
+#   Hybrid   -> UK only
+#   On-site  -> UK only
+# ---------------------------------------------------------------------------
+uk_only_sources: ["reed", "adzuna", "jooble"]     # every job from these is in the UK
+
+# A remote job is accepted if its location/eligibility text contains any of these
+remote_ok_locations:
+  - "worldwide"
+  - "anywhere"
+  - "global"
+  - "international"
+  - "europe"
+  - "emea"
+  - "gmt"
+  - "bst"
+  - "cet"
+  - "utc"
+  - "uk"
+  - "united kingdom"
+# (a bare "Remote" with no region attached is also accepted)
+# true  = skip remote jobs that say e.g. "USA only" (they can't legally hire you from the UK)
+# false = apply to every remote job regardless of stated region
+remote_reject_region_locked: true
+
+# UK place names (hybrid / on-site must match one, unless the source is UK-only)
+uk_locations:
+  - "united kingdom"
+  - "uk"
+  - "england"
+  - "scotland"
+  - "wales"
+  - "london"
+  - "southampton"
+  - "portsmouth"
+  - "winchester"
+  - "bournemouth"
+  - "reading"
+  - "bristol"
+  - "oxford"
+  - "birmingham"
+  - "manchester"
+  - "leeds"
+  - "cambridge"
+  - "guildford"
+  - "basingstoke"
+  - "remote - uk"
+  - "remote (uk)"
+  - "gb"
+  - "great britain"
+  - "northern ireland"
+  - "edinburgh"
+  - "glasgow"
+  - "cardiff"
+  - "belfast"
+  - "newcastle"
+  - "sheffield"
+  - "nottingham"
+  - "liverpool"
+
+# null = don't filter; true = drop postings that say they can't sponsor visas
+needs_visa_sponsorship: null
+no_sponsorship_phrases:
+  - "unable to sponsor"
+  - "cannot sponsor"
+  - "can't sponsor"
+  - "no sponsorship"
+  - "not able to offer sponsorship"
+  - "sponsorship is not available"
+  - "must already have the right to work"
+
+# Skill vocabulary used for scoring (matched as whole words in the posting)
+skills:
   - "python"
   - "sql"
   - "excel"
   - "power bi"
   - "tableau"
+  - "looker"
+  - "qlik"
+  - "r"
+  - "sas"
+  - "spss"
   - "statistics"
-  - "ml basics"
   - "machine learning"
+  - "pandas"
+  - "numpy"
+  - "scikit-learn"
+  - "dbt"
+  - "snowflake"
+  - "bigquery"
+  - "azure"
+  - "aws"
+  - "gcp"
+  - "databricks"
+  - "spark"
+  - "airflow"
+  - "vba"
+  - "git"
+  - "etl"
   - "data cleaning"
-  - "eda"
-  - "exploratory data analysis"
-
-allowed_work_types:
-  - "Remote"
-  - "Hybrid"
-  - "On-site"
-  - "Unspecified"
-
-exclude_keywords:
-  - "senior"
-  - "lead"
-  - "principal"
-  - "manager"
-  - "head of"
-  - "director"
-  - "architect"
-  - "staff"
-  - "vp"
-
-experience_exclusions:
-  - "3+ years"
-  - "4+ years"
-  - "5+ years"
-  - "6+ years"
-  - "7+ years"
-  - "8+ years"
-  - "10+ years"
-  - "3 years of experience"
-  - "4 years of experience"
-  - "5 years of experience"
-  - "extensive experience required"
-  - "must have proven experience"
-  - "must have industry experience"
+  - "data visualisation"
+  - "data visualization"
+  - "dashboards"
+  - "a/b testing"
+  - "hypothesis testing"
+  - "regression"
+  - "forecasting"
+  - "google analytics"
+  - "salesforce"

@@ -1,28 +1,9 @@
+.env
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Environments & Secrets
-.env
-*.env
-.env.local
-credentials.json
-secrets.yaml
-.venv
-env/
+.venv/
 venv/
-ENV/
-
-# Pytest / Coverage
 .pytest_cache/
-.coverage
-htmlcov/
-
-# Local databases & logs
-data/applications_tracker.json
-logs/*.log
-*.log
-
-# IDE
-.vscode/
-.idea/
+logs/
+data/*
+!data/.gitkeep

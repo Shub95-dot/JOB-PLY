@@ -1,0 +1,9 @@
+<!doctype html><html><body><div id="root"><h1>Data Analyst</h1>
+<form class="ashby-application-form" onsubmit="event.preventDefault();setTimeout(()=>{document.getElementById('root').innerHTML='<h2>Application submitted</h2><p>Thanks for applying! We have received your application.</p>'},300)">
+<div><label for="_systemfield_name">Name<span>*</span></label><input id="_systemfield_name" name="_systemfield_name" required></div>
+<div><label for="_systemfield_email">Email<span>*</span></label><input id="_systemfield_email" name="_systemfield_email" type="email" required></div>
+<div><label for="_systemfield_resume">Resume<span>*</span></label><input id="_systemfield_resume" type="file" required></div>
+<fieldset><legend>Are you willing to work from our Southampton office 3 days a week?*</legend>
+ <label><input type="radio" name="q_office" value="yes" required>Yes</label><label><input type="radio" name="q_office" value="no">No</label></fieldset>
+<div><label for="q_why">Why do you want to work at Gamma?*</label><textarea id="q_why" required></textarea></div>
+<button type="submit">Submit Application</button></form></div></body></html>

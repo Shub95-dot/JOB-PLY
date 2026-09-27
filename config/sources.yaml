@@ -1,0 +1,67 @@
+# ============================================================================
+# JOB SOURCES — 13 in total, official APIs / public feeds only
+#
+#   UK (hybrid + on-site)      reed, adzuna, jooble
+#   Worldwide remote           remotive, remoteok, himalayas, jobicy, workingnomads,
+#                              weworkremotely, arbeitnow
+#   Company career boards      greenhouse, lever, ashby   (any country; the location rules
+#                              in filters.yaml keep only remote-worldwide or UK hybrid/on-site)
+#
+# Location rules (filters.yaml): Remote = anywhere in the world, Hybrid/On-site = UK only.
+# Not included: LinkedIn, Indeed, Totaljobs, CV-Library, Glassdoor — no public API, and
+# their terms prohibit scraping/bots (accounts get restricted).
+# ============================================================================
+
+# Searches used by the UK aggregators (Reed, Adzuna, Jooble)
+searches:
+  - keywords: "graduate data analyst"
+    location: ""                 # empty = whole UK
+  - keywords: "junior data analyst"
+    location: ""
+  - keywords: "data analyst"
+    location: "Southampton"
+    distance_miles: 30
+  - keywords: "data analyst"
+    location: "London"
+    distance_miles: 10
+  - keywords: "reporting analyst"
+    location: "Southampton"
+    distance_miles: 40
+  - keywords: "junior data scientist"
+    location: ""
+  - keywords: "hybrid data analyst"
+    location: ""
+
+# ---- UK aggregators (free keys in .env) ----
+reed:
+  enabled: true                  # REED_API_KEY      https://www.reed.co.uk/developers/jobseeker
+adzuna:
+  enabled: true                  # ADZUNA_APP_ID/KEY https://developer.adzuna.com
+  pages: 2
+jooble:
+  enabled: true                  # JOOBLE_API_KEY    https://jooble.org/api/about
+
+# ---- worldwide remote boards (no key needed) ----
+remotive:
+  enabled: true
+remoteok:
+  enabled: true
+himalayas:
+  enabled: true
+jobicy:
+  enabled: true
+workingnomads:
+  enabled: true
+weworkremotely:
+  enabled: true
+arbeitnow:
+  enabled: true                  # Europe-heavy; non-English postings are filtered out
+
+# ---- company career boards: the only ones that can be AUTO-SUBMITTED ----
+# Token = the part of the URL after the ATS domain:
+#   job-boards.greenhouse.io/<token>   jobs.lever.co/<site>   jobs.ashbyhq.com/<org>
+# Add companies you want, then run:  python main.py check-boards
+# Boards found through any other source's apply links are added automatically.
+greenhouse_boards: []
+lever_sites: []
+ashby_orgs: []

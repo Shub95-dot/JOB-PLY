@@ -1,9 +1,0 @@
-provider: "discord"
-
-enable_application_alerts: true
-enable_duplicate_alerts: true
-enable_rejection_alerts: true
-enable_daily_summary: true
-enable_weekly_summary: true
-enable_interview_prep_alerts: true
-enable_error_alerts: true

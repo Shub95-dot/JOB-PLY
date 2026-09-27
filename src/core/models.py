@@ -1,88 +1,78 @@
-"""Domain models for job application agent using Pydantic."""
+"""Domain models."""
+from __future__ import annotations
 
-from typing import List, Dict, Any, Optional
-from pydantic import BaseModel, Field
 import hashlib
-from datetime import datetime
+import re
+from enum import Enum
+from typing import Optional
+
+from pydantic import BaseModel, Field
+
+
+class Status(str, Enum):
+    """Application lifecycle. Only `APPLIED` means an employer actually received an application,
+    and the tracker refuses to set it without evidence."""
+    FOUND = "found"                    # discovered, not yet evaluated
+    FILTERED_OUT = "filtered_out"      # failed hard filters (reason stored)
+    SHORTLISTED = "shortlisted"        # passed filters, scored, below daily cap / awaiting materials
+    READY = "ready"                    # cover letter prepared, can be auto-submitted (supported ATS)
+    NEEDS_MANUAL = "needs_manual"      # needs you: unsupported site, CAPTCHA, or unanswered required question
+    APPLIED = "applied"                # VERIFIED submission (confirmation page / your explicit confirmation)
+    FAILED = "failed"                  # submit attempted, not confirmed (validation error, timeout...)
+    SKIPPED = "skipped"                # you chose not to apply
+    RESPONDED = "responded"
+    INTERVIEW = "interview"
+    REJECTED = "rejected"              # employer rejected
+    OFFER = "offer"
+    LEGACY_UNVERIFIED = "legacy_unverified"  # imported from the old tool; never proven submitted
+
+
+# statuses that mean "we are done looking at this posting"
+TERMINAL = {Status.FILTERED_OUT, Status.APPLIED, Status.SKIPPED, Status.RESPONDED,
+            Status.INTERVIEW, Status.REJECTED, Status.OFFER, Status.LEGACY_UNVERIFIED}
+
+
+def _norm(s: str) -> str:
+    s = s.lower()
+    s = re.sub(r"\(.*?\)", " ", s)             # drop "(hybrid)", "(on-site)" etc.
+    s = re.sub(r"\b(ltd|limited|plc|llp|inc|uk|group)\b", " ", s)
+    return re.sub(r"[^a-z0-9]+", " ", s).strip()
 
 
 class Job(BaseModel):
-    """Represents a job posting."""
-    job_id: Optional[str] = Field(default=None, description="Unique identifier for the job")
-    title: str = Field(..., description="Job title")
-    company: str = Field(..., description="Company name")
-    location: str = Field(default="Unspecified", description="Job location")
-    work_type: str = Field(default="Unspecified", description="Remote, Hybrid, On-site, or Unspecified")
-    description: str = Field(..., description="Full text description of the job posting")
-    url: str = Field(..., description="URL to the job posting")
-    source: str = Field(default="unknown", description="Source provider or board")
-    posted_date: Optional[str] = Field(default=None, description="Posting date string")
+    source: str                        # reed / adzuna / greenhouse / lever / ashby / remotive
+    source_id: str                     # the platform's own job id
+    title: str
+    company: str
+    location: str = ""
+    description: str = ""
+    url: str                           # human-readable posting page
+    apply_url: Optional[str] = None    # where the application form lives (if known)
+    salary: Optional[str] = None
+    posted_date: Optional[str] = None
+    work_type: str = "Unspecified"     # Remote / Hybrid / On-site / Unspecified
 
-    def model_post_init(self, __context: Any) -> None:
-        """Generate unique job_id if not provided."""
-        if not self.job_id:
-            raw_id = f"{self.company.lower().strip()}_{self.title.lower().strip()}_{self.url.strip()}"
-            self.job_id = hashlib.md5(raw_id.encode("utf-8")).hexdigest()[:12]
+    @property
+    def key(self) -> str:
+        return f"{self.source}:{self.source_id}"
 
-
-class Profile(BaseModel):
-    """User profile containing candidate background, skills, and preferences."""
-    name: str
-    profile_summary: Optional[str] = Field(default=None, description="ATS-optimized professional summary")
-    contact: Dict[str, str] = Field(default_factory=dict)
-    education: List[Dict[str, Any]] = Field(default_factory=list)
-    skills: Any = Field(default_factory=list, description="Categorized list or dict of candidate technical skills")
-    projects: List[Dict[str, Any]] = Field(default_factory=list)
-    experience: List[Dict[str, Any]] = Field(default_factory=list)
-    certifications: List[Dict[str, Any]] = Field(default_factory=list)
-    preferences: Dict[str, Any] = Field(default_factory=dict)
+    @property
+    def fingerprint(self) -> str:
+        """Cross-source duplicate detection: same company + same normalised title."""
+        raw = f"{_norm(self.company)}|{_norm(self.title)}"
+        return hashlib.sha1(raw.encode()).hexdigest()[:16]
 
 
-class ResumeVersion(BaseModel):
-    """Tailored version of the resume for a specific job."""
-    job_id: str
-    text: str
-    keywords: List[str] = Field(default_factory=list)
-    score: float = Field(..., ge=0.0, le=1.0, description="Match score between 0.0 and 1.0")
+class FilterResult(BaseModel):
+    accepted: bool
+    reason: str
+    matched_skills: list[str] = Field(default_factory=list)
 
 
-class CoverLetter(BaseModel):
-    """Job-tailored cover letter."""
-    job_id: str
-    text: str
-    tone: str = "professional"
-    length_words: int = Field(..., description="Word count of cover letter text")
-
-
-class ApplicationLog(BaseModel):
-    """Log entry tracking application status and follow-ups."""
-    job_id: str
-    status: str = Field(..., description="prepared, submitted, or error")
-    submitted_at: str = Field(default_factory=lambda: datetime.now().isoformat())
-    notes: str = ""
-    follow_up_date: Optional[str] = None
-
-
-class FormSubmissionPayload(BaseModel):
-    """Mapped fields for job portal form submission."""
-    job_id: str
-    first_name: str
-    last_name: str
-    email: str
-    phone: str
-    linkedin_url: str
-    github_url: str
-    portfolio_url: str
-    resume_text: str
-    cover_letter_text: str
-    custom_fields: Dict[str, Any] = Field(default_factory=dict)
-
-
-class WorkflowJobResult(BaseModel):
-    """Structured JSON output for a processed job application."""
-    job: Dict[str, str]
-    match_reason: str
-    required_skills: List[str]
-    resume_version: Dict[str, Any]
-    cover_letter: Dict[str, Any]
-    application: Dict[str, str]
+class ApplyOutcome(BaseModel):
+    """Result of one submission attempt."""
+    status: Status
+    detail: str = ""
+    confirmation_text: Optional[str] = None
+    evidence_dir: Optional[str] = None
+    unanswered: list[str] = Field(default_factory=list)

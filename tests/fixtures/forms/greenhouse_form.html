@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Job Application for Junior Data Analyst at Beta</title></head><body>
+<div id="app"><h1>Junior Data Analyst</h1><p>London, UK</p>
+<form id="application-form" onsubmit="return go(event)">
+ <div class="field"><label for="first_name">First Name<span aria-hidden="true">*</span></label><input id="first_name" aria-required="true"></div>
+ <div class="field"><label for="last_name">Last Name<span aria-hidden="true">*</span></label><input id="last_name" aria-required="true"></div>
+ <div class="field"><label for="email">Email<span>*</span></label><input id="email" type="email" aria-required="true"></div>
+ <div class="field"><label for="phone">Phone</label><input id="phone" type="tel"></div>
+ <div class="field"><label for="resume">Resume/CV<span>*</span></label><input id="resume" type="file" style="position:absolute;left:-9999px" aria-required="true"></div>
+ <div class="field"><label for="cover_letter">Cover Letter</label><input id="cover_letter" type="file"></div>
+ <div class="field"><label for="question_111">LinkedIn Profile</label><input id="question_111"></div>
+ <div class="field"><label for="question_222">Will you now or in the future require visa sponsorship to work in the UK?<span>*</span></label>
+   <select id="question_222" aria-required="true"><option value="">Select...</option><option>Yes</option><option>No</option></select></div>
+ <div class="field"><label for="question_333">How did you hear about this job?</label><input id="question_333"></div>
+ <div class="field"><label for="gender">Gender</label><select id="gender"><option value="">Select...</option><option>Male</option><option>Female</option><option>Decline To Self Identify</option></select></div>
+ <button type="submit">Submit application</button>
+</form></div>
+<script>
+function go(e){e.preventDefault();
+  const req=[...document.querySelectorAll('[aria-required=true]')].filter(x=>!(x.type==='file'?x.files.length:x.value));
+  if(req.length){req.forEach(x=>x.setAttribute('aria-invalid','true'));document.body.insertAdjacentHTML('beforeend','<p>This field is required</p>');return false;}
+  setTimeout(()=>{document.getElementById('app').innerHTML='<h1>Thank you for applying.</h1><p>Your application has been received.</p>'},300);return false;}
+</script></body></html>
