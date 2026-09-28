@@ -62,6 +62,24 @@ arbeitnow:
 #   job-boards.greenhouse.io/<token>   jobs.lever.co/<site>   jobs.ashbyhq.com/<org>
 # Add companies you want, then run:  python main.py check-boards
 # Boards found through any other source's apply links are added automatically.
-greenhouse_boards: []
-lever_sites: []
-ashby_orgs: []
+# Found 28 Sep 2026 via public search — UK employers with data / analyst roles on these systems.
+# Filters still apply (seniority, UK/remote, experience), so senior roles at these firms are skipped.
+greenhouse_boards:
+  - policyexpert          # Policy Expert (EU host) — has posted data analyst roles
+  - theeconomistgroup     # The Economist Group (EU host)
+  - mangroup              # Man Group (EU host)
+  - blab                  # B Lab — Data Analyst, London
+  - capitalontap          # Capital on Tap — Commercial Analyst
+  - carbonchain           # CarbonChain — London
+  - avepoint              # AvePoint — Data Analyst
+lever_sites:
+  - zopa                  # Zopa — Graduate Analyst
+  - theinformationlab     # The Information Lab — The Data School UK (paid data-analyst training job)
+  - moonpay               # MoonPay
+  - analyticpartners      # Analytic Partners
+ashby_orgs:
+  - ARQ                   # ARQ — Data Analyst, London
+  - junior                # Junior AI — Data Analyst, London
+  - gohenry               # GoHenry — Data Analyst
+  - relay                 # Relay Technologies — Data Analyst, London
+  - levels                # Levels — Data Migration Analyst

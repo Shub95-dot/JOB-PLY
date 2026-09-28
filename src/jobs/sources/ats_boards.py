@@ -16,32 +16,45 @@ log = logging.getLogger("sources")
 
 
 class GreenhouseSource(JobSource):
+    """Greenhouse public job-board API. Tries the global host, then the EU host
+    (companies such as Policy Expert or The Economist are on job-boards.eu.greenhouse.io)."""
     name = "greenhouse"
     API = "https://boards-api.greenhouse.io/v1/boards/{token}/jobs"
+    API_EU = "https://boards-api.eu.greenhouse.io/v1/boards/{token}/jobs"
 
     def __init__(self, tokens: list[str], session=None):
         super().__init__(session)
         self.tokens = tokens
 
     def fetch(self) -> list[Job]:
+        from src.apply.ats import detect
         jobs: list[Job] = []
         for token in self.tokens:
-            try:
-                data = self.get_json(self.API.format(token=token), params={"content": "true"})
-            except SourceError as e:
-                log.warning("greenhouse/%s: %s", token, e)
+            data, eu = None, False
+            for api, is_eu in ((self.API, False), (self.API_EU, True)):
+                try:
+                    data, eu = self.get_json(api.format(token=token), params={"content": "true"}), is_eu
+                    break
+                except SourceError:
+                    continue
+            if data is None:
+                log.warning("greenhouse/%s: board not found on global or EU host", token)
                 continue
+            host = "job-boards.eu.greenhouse.io" if eu else "job-boards.greenhouse.io"
             company = (data.get("meta") or {}).get("company_name") or token.replace("-", " ").title()
             for r in data.get("jobs", []):
                 jid = str(r["id"])
                 loc = (r.get("location") or {}).get("name", "")
                 desc = html_to_text(r.get("content"))
+                form = f"https://{host}/{token}/jobs/{jid}"
+                t = detect(r.get("absolute_url") or "")
+                if t.ats == "greenhouse" and t.form_url:
+                    form = t.form_url
                 jobs.append(Job(
                     source="greenhouse", source_id=f"{token}/{jid}",
                     title=r.get("title", ""), company=r.get("company_name") or company,
                     location=loc, description=desc,
-                    url=r.get("absolute_url") or f"https://job-boards.greenhouse.io/{token}/jobs/{jid}",
-                    apply_url=f"https://job-boards.greenhouse.io/{token}/jobs/{jid}",
+                    url=r.get("absolute_url") or form, apply_url=form,
                     posted_date=r.get("updated_at"),
                     work_type=infer_work_type(r.get("title", ""), loc),
                 ))
@@ -49,7 +62,6 @@ class GreenhouseSource(JobSource):
         return jobs
 
     def questions(self, token: str, job_id: str) -> list[dict]:
-        """Application questions (label, required, field names/types) — used as a pre-flight check."""
         data = self.get_json(f"{self.API.format(token=token)}/{job_id}", params={"questions": "true"})
         return data.get("questions", [])
 

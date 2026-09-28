@@ -66,3 +66,11 @@ def test_ats_boards():
                                              "workplaceType": "OnSite"}]}})
     j = AshbySource(["gamma"], session=ab).fetch()[0]
     assert j.apply_url == "https://jobs.ashbyhq.com/gamma/u2/application"
+
+
+def test_greenhouse_falls_back_to_eu_host():
+    s = Sess({"boards-api.eu.greenhouse.io/v1/boards/policyexpert/jobs": {"jobs": [
+        {"id": 42, "title": "Data Analyst", "location": {"name": "Fareham, UK"}, "content": "SQL",
+         "absolute_url": "https://job-boards.eu.greenhouse.io/policyexpert/jobs/42"}]}})
+    j = GreenhouseSource(["policyexpert"], session=s).fetch()[0]
+    assert j.apply_url == "https://job-boards.eu.greenhouse.io/policyexpert/jobs/42"
