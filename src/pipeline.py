@@ -90,6 +90,8 @@ class Pipeline:
     def discover(self, sources: Optional[list] = None) -> dict:
         stats = {"fetched": 0, "new": 0, "duplicates": 0, "filtered_out": 0, "shortlisted": 0, "errors": []}
         for src in sources if sources is not None else self.build_sources():
+            name = getattr(src, "name", src.__class__.__name__)
+            log.info("fetching %s ...", name)
             try:
                 jobs = src.fetch()
             except Exception as e:   # one broken source never stops the run

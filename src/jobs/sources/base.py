@@ -33,7 +33,7 @@ class JobSource(ABC):
         ...
 
     def get_json(self, url: str, *, params: dict | None = None, auth=None,
-                 retries: int = 2, timeout: int = 20) -> Any:
+                 retries: int = 1, timeout=(6, 12)) -> Any:
         last: Exception | None = None
         for attempt in range(retries + 1):
             try:
@@ -48,7 +48,8 @@ class JobSource(ABC):
                 raise
             except Exception as e:  # network / 5xx / JSON
                 last = e
-                time.sleep(1.5 * (attempt + 1))
+                if attempt < retries:
+                    time.sleep(1.5)
         raise SourceError(f"{self.name}: {url} failed after retries: {last}")
 
 

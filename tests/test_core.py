@@ -147,3 +147,12 @@ def test_legacy_requeue_filters_junk(tmp_path):
     st = import_legacy(f, t, requeue=True)
     assert st["requeued"] == 1 and st["filtered_out"] == 2
     assert t.counts() == {"needs_manual": 1, "filtered_out": 2}
+
+
+def test_unquoted_yaml_yes_no_become_text(profile):
+    import yaml
+    cfg = yaml.safe_load("rules:\n  - id: sponsorship\n    patterns: [sponsor]\n    answer: No\n"
+                         "  - id: right_to_work\n    patterns: [right to work]\n    answer: Yes\n")
+    a = Answers(cfg, profile)
+    assert a.resolve("Will you require sponsorship?", "select").value == "No"
+    assert pick_option(["Select...", "Yes", "No"], a.resolve("Do you have the right to work in the UK?", "radio")) == "Yes"

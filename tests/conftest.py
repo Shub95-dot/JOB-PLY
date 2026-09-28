@@ -15,9 +15,18 @@ def profile():
     return Profile.load(ROOT / "config" / "user_profile.yaml")
 
 
+TODO_RULES = ("sponsorship", "right_to_work", "notice_period", "salary", "relocation", "driving", "years_experience")
+
+
 @pytest.fixture
 def answers_cfg():
-    return yaml.safe_load(open(ROOT / "config" / "answers.yaml", encoding="utf-8"))
+    """answers.yaml patterns with the eligibility answers reset to TODO, so tests don't depend on
+    what you filled in."""
+    cfg = yaml.safe_load(open(ROOT / "config" / "answers.yaml", encoding="utf-8"))
+    for r in cfg["rules"]:
+        if r["id"] in TODO_RULES:
+            r["answer"] = "TODO"
+    return cfg
 
 
 @pytest.fixture

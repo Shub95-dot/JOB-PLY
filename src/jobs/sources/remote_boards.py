@@ -136,7 +136,7 @@ class WeWorkRemotelySource(JobSource):
         jobs = []
         for feed in self.FEEDS:
             try:
-                r = self.session.get(feed, timeout=20)
+                r = self.session.get(feed, timeout=(6, 12))
                 r.raise_for_status()
                 root = ET.fromstring(r.content)
             except Exception as e:
@@ -199,7 +199,7 @@ class JoobleSource(JobSource):
         out: dict[str, Job] = {}
         for s in self.searches:
             try:
-                r = self.session.post(f"https://uk.jooble.org/api/{self.key}", timeout=20,
+                r = self.session.post(f"https://uk.jooble.org/api/{self.key}", timeout=(6, 12),
                                       json={"keywords": s["keywords"], "location": s.get("location") or "United Kingdom"})
                 r.raise_for_status()
                 data = r.json()

@@ -57,7 +57,7 @@ class Answers:
         self.rules = []
         for r in cfg.get("rules", []):
             pats = [re.compile(p, re.I) for p in r.get("patterns", [])]
-            self.rules.append((r["id"], pats, str(r.get("answer", "TODO"))))
+            self.rules.append((r["id"], pats, _as_text(r.get("answer", "TODO"))))
 
     def resolve(self, label: str, kind: str = "text") -> Resolution:
         lab = re.sub(r"\s+", " ", (label or "")).strip().rstrip("*").strip()
@@ -87,6 +87,15 @@ class Answers:
         if kind == "file" and ("resume" in low or "cv" in low or not low):
             return Resolution("resume", "resume")
         return Resolution(None, "unknown")
+
+
+def _as_text(v) -> str:
+    """YAML turns unquoted Yes/No/On/Off into booleans — turn them back into form answers."""
+    if isinstance(v, bool):
+        return "Yes" if v else "No"
+    if v is None:
+        return "TODO"
+    return str(v)
 
 
 def pick_option(options: list[str], res: Resolution) -> Optional[str]:
