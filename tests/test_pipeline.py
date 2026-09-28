@@ -126,3 +126,17 @@ def test_assist_normal_browser_submit_is_recorded(settings, profile):
     assert res["applied"] == 1
     row = t.get(job.key)
     assert row["status"] == "applied" and row["apply_method"] == "user_confirmed"
+
+
+
+def test_prepare_puts_auto_jobs_first_and_uncapped(settings, profile):
+    t = Tracker(settings.db_path)
+    pipe = Pipeline(settings, t, profile, sources_cfg={})
+    for i in range(3):   # high-scoring manual jobs
+        j = Job(source="reed", source_id=f"m{i}", title="Data Analyst", company=f"M{i}", description=DESC, url=f"https://r/{i}")
+        t.add_found(j); t.update_fields(j.key, ats="reed", score=0.9); t.set_status(j.key, Status.SHORTLISTED, "")
+    j = Job(source="lever", source_id="a/1", title="Data Analyst", company="Auto", description=DESC, url="https://jobs.lever.co/a/1")
+    t.add_found(j); t.update_fields(j.key, ats="lever", score=0.2); t.set_status(j.key, Status.SHORTLISTED, "")
+    pipe.prepare(limit=1, use_llm=False)
+    assert t.get("lever:a/1")["status"] == "ready"                       # low score but auto -> prepared
+    assert len(t.by_status(Status.NEEDS_MANUAL)) == 1                    # manual capped at limit

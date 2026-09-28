@@ -175,7 +175,12 @@ class Pipeline:
     def prepare(self, limit: int = 40, use_llm: bool = True) -> int:
         writer = CoverLetterWriter(self.profile, self.s.llm_model, use_llm)
         n = 0
-        for r in self.t.by_status(Status.SHORTLISTED)[:limit]:
+        rows = self.t.by_status(Status.SHORTLISTED)
+        # auto-submittable jobs first and uncapped, so `run` can apply to them straight away;
+        # jobs that need you (assist) follow, best matches first, up to `limit`
+        auto = [r for r in rows if r["ats"] in ats_mod.AUTO_SUPPORTED]
+        manual = [r for r in rows if r["ats"] not in ats_mod.AUTO_SUPPORTED][:limit]
+        for r in auto + manual:
             job = row_to_job(r)
             letter = writer.write(job, row_list(r, "matched_skills"))
             notes = "; ".join(letter.guard_notes)
