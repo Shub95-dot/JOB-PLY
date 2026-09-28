@@ -61,3 +61,9 @@ def test_gate_blocks_unreviewed_profile(settings, profile):
     pipe = Pipeline(settings, Tracker(settings.db_path), profile, sources_cfg={})
     with pytest.raises(GateError):
         pipe.apply()
+
+
+def test_dry_run_allowed_before_review(settings, profile):
+    settings.profile_reviewed = False
+    pipe = Pipeline(settings, Tracker(settings.db_path), profile, sources_cfg={})
+    assert pipe.apply(dry_run=True)["applied"] == 0      # no GateError; nothing queued

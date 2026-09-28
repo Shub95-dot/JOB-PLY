@@ -158,9 +158,9 @@ class Pipeline:
         return n
 
     # ================================================================== 3. auto-apply
-    def check_gates(self) -> None:
+    def check_gates(self, dry_run: bool = False) -> None:
         problems = []
-        if not self.s.profile_reviewed:
+        if not self.s.profile_reviewed and not dry_run:
             problems.append("config/settings.yaml: set profile_reviewed: true after checking config/user_profile.yaml "
                             "and config/answers.yaml are accurate")
         if not self.s.cv_path or not self.s.cv_path.exists():
@@ -181,7 +181,7 @@ class Pipeline:
                 ctx.close()
 
     def apply(self, dry_run: bool = False, limit: Optional[int] = None, context=None) -> dict:
-        self.check_gates()
+        self.check_gates(dry_run)
         remaining = self.s.daily_cap - self.t.count_applied_today()
         if limit is not None:
             remaining = min(remaining, limit)

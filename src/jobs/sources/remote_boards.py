@@ -28,10 +28,16 @@ class RemoteOKSource(JobSource):
 
     def fetch(self) -> list[Job]:
         out: dict[str, Job] = {}
-        for tag in self.tags:
-            data = self.get_json(self.URL, params={"tag": tag})
+        self.session.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) job-app-agent"
+        self.session.max_redirects = 5
+        data = self.get_json(self.URL)
+        tags = [t.lower() for t in self.tags]
+        for _ in [0]:
             for r in data if isinstance(data, list) else []:
                 if not isinstance(r, dict) or "id" not in r or "position" not in r:
+                    continue
+                text = (r.get("position", "") + " " + " ".join(r.get("tags") or [])).lower()
+                if not any(t in text for t in tags):
                     continue
                 jid = str(r["id"])
                 out[jid] = Job(
@@ -197,14 +203,27 @@ class JoobleSource(JobSource):
             log.warning("jooble: JOOBLE_API_KEY not set — skipping")
             return []
         out: dict[str, Job] = {}
+        hosts = ["https://uk.jooble.org/api/", "https://jooble.org/api/"]
         for s in self.searches:
-            try:
-                r = self.session.post(f"https://uk.jooble.org/api/{self.key}", timeout=(6, 12),
-                                      json={"keywords": s["keywords"], "location": s.get("location") or "United Kingdom"})
-                r.raise_for_status()
-                data = r.json()
-            except Exception as e:
-                log.warning("jooble: %s", e)
+            data = None
+            for host in list(hosts):
+                try:
+                    r = self.session.post(host + self.key, timeout=(6, 12),
+                                          json={"keywords": s["keywords"], "location": s.get("location") or "United Kingdom"})
+                    if r.status_code in (401, 403):
+                        hosts.remove(host)          # this host doesn't accept the key; don't retry it
+                        continue
+                    r.raise_for_status()
+                    data = r.json()
+                    hosts[:] = [host]               # remember the host that works
+                    break
+                except Exception as e:
+                    log.warning("jooble: %s", e)
+            if not hosts:
+                log.warning("jooble: key rejected (403) by uk.jooble.org and jooble.org — check JOOBLE_API_KEY "
+                            "or request a UK key at https://uk.jooble.org/api/about")
+                break
+            if data is None:
                 continue
             for j in data.get("jobs", []):
                 jid = str(j.get("id"))

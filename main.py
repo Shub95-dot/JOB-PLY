@@ -8,6 +8,7 @@ and walks you through the rest.
   python main.py apply [--dry-run]   submit READY jobs on Greenhouse/Lever/Ashby
   python main.py assist              open each job that needs you; you submit, it records it
   python main.py status              counts + follow-ups due
+  python main.py filtered            why jobs were filtered out, grouped, with examples
   python main.py show KEY            full record + event history for one job
   python main.py mark KEY STATUS     e.g. mark reed:5735521 interview   (interview -> writes prep guide)
   python main.py prep KEY            write/refresh the interview-prep guide for one job
@@ -51,6 +52,8 @@ def main(argv=None) -> int:
     s = sub.add_parser("assist")
     s.add_argument("--limit", type=int, default=20)
     sub.add_parser("status")
+    fl = sub.add_parser("filtered", help="why jobs were filtered out (grouped), with example titles")
+    fl.add_argument("--examples", type=int, default=5)
     sh = sub.add_parser("show")
     sh.add_argument("key")
     m = sub.add_parser("mark")
@@ -75,6 +78,8 @@ def main(argv=None) -> int:
 
     if args.cmd == "status":
         return _status(tracker)
+    if args.cmd == "filtered":
+        return _filtered(tracker, args.examples)
     if args.cmd == "show":
         return _show(tracker, args.key)
     if args.cmd == "mark":
@@ -163,6 +168,26 @@ def _status(t: Tracker) -> int:
         print(f"\nCOULD NOT AUTO-APPLY: {len(blocked)} jobs  (finish them with: python main.py assist)")
         for reason, n in breakdown(blocked).items():
             print(f"  {n:>4}  {reason}")
+    return 0
+
+
+def _filtered(t: Tracker, n_examples: int) -> int:
+    import re as _re
+    groups: dict[str, list] = {}
+    for r in t.by_status(Status.FILTERED_OUT, order="found_at DESC"):
+        reason = r["reason"] or "?"
+        key = _re.sub(r"'[^']*'", "'…'", reason)                 # "title contains 'x'" -> "title contains '…'"
+        key = _re.sub(r"\d+(\.\d+)?", "N", key)                # numbers -> N
+        groups.setdefault(key, []).append(r)
+    total = sum(len(v) for v in groups.values())
+    print(f"\nFiltered out: {total} jobs\n")
+    for key, rows in sorted(groups.items(), key=lambda kv: -len(kv[1])):
+        print(f"{len(rows):>5}  {key}")
+        for r in rows[:n_examples]:
+            extra = f"  [{r['reason']}]" if "'" in (r["reason"] or "") or "relevance" in (r["reason"] or "") else ""
+            print(f"         - {r['title'][:60]} — {(r['company'] or '')[:30]} ({r['source']}){extra}")
+    sl = t.by_status(Status.SHORTLISTED, Status.READY, Status.NEEDS_MANUAL)
+    print(f"\nPassed filters: {len([r for r in sl if (r['source'] or '') not in ('legacy', 'linkedin')])} (excluding old imported jobs)")
     return 0
 
 
