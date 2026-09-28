@@ -13,9 +13,27 @@
 # ============================================================================
 rules:
   # ---- eligibility (legal statements — you must fill these in yourself) ----
+  - id: graduate_cohort
+    patterns: ["are you a .*(2025|2026|2027).*graduate", "graduat\\w* in (2025|2026|2027)"]
+    answer: "Yes"            # "Yes" or "No"
+  - id: which_university
+    patterns: ["what university", "which university", "university .*(attend|studied|study)"]
+    answer: "Solent University"
+  - id: start_date_commit
+    patterns: ["commit to .*start date", "start dates?.*commit"]
+    answer: "Yes"            # "Yes" or "No"
+  - id: graduate_visa
+    patterns: ["graduate visa"]
+    answer: "Yes"            # "Yes" or "No"
+  - id: reasonable_adjustments
+    patterns: ["reasonable adjustment"]
+    answer: "Yes"            # "Yes" or "No"
+  - id: a_level_maths
+    patterns: ["a-?level math"]
+    answer: "Yes"            # "Yes" or "No"
   - id: sponsorship
     patterns: ["sponsor", "require.*visa", "visa.*requir"]
-    answer: NO            # "Yes" or "No"
+    answer: "Yes"            # "Yes" or "No"
   - id: right_to_work
     patterns: ["right to work", "eligib\\w* to work", "legally (authori[sz]ed|entitled|permitted)", "work permit", "permission to work"]
     answer: Yes           # "Yes" or "No"
@@ -25,8 +43,7 @@ rules:
 
   # ---- logistics ----
   - id: notice_period
-    patterns: ["notice period", "when (can|could) you start", "earliest start", "start date", "availability to start"]
-    answer: "2 weeks"            # e.g. "2 weeks"
+    patterns: ["notice period", "when (can|could) you start", "earliest (possible )?start", "what is your (earliest )?start date", "availability to start"]
   - id: salary
     patterns: ["salary", "compensation", "pay expectation", "expected pay"]
     answer: "£28,000–£32,000"            # e.g. "£28,000–£32,000"
