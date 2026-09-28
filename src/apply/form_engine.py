@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -82,6 +83,13 @@ SCAN_JS = r"""
 """
 
 
+_IDENTITY_RULES = {"first_name", "last_name", "preferred_name", "full_name", "email", "phone",
+                   "linkedin", "github", "portfolio", "resume", "cover_letter_file", "cover_letter"}
+_YES_NO = {"yes", "no", "true", "false", "y", "n"}
+_FOLLOW_UP = re.compile(r"^\s*(if (you )?(selected|answered|chose|ticked|said)\b|if (yes|no|so)\b|"
+                        r"please (provide|give|share|describe) (more |further )?details|details of your)", re.I)
+
+
 @dataclass
 class Control:
     id: str
@@ -134,6 +142,14 @@ class FormEngine:
         return plan
 
     def _value_for(self, c: Control, res: Resolution) -> Optional[str]:
+        free_text = c.kind in ("text", "textarea", "combobox", "email", "tel", "url", "number")
+        if free_text and res.rule not in _IDENTITY_RULES:
+            # "If you selected yes, please give details…" follow-ups are never auto-answered
+            if _FOLLOW_UP.search(c.label or ""):
+                return None
+            # a Yes/No answer belongs in a radio/select, never typed into a text box
+            if (res.value or "").strip().lower() in _YES_NO:
+                return None
         if c.kind == "file":
             if res.rule == "resume":
                 return str(self.cv_path)

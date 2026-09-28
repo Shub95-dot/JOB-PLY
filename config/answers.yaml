@@ -25,12 +25,15 @@ rules:
   - id: graduate_visa
     patterns: ["graduate visa"]
     answer: "Yes"            # "Yes" or "No"
+  - id: sponsorship_graduate_visa_exception
+    patterns: ["graduate visa.*(select|answer|choose) no", "if you will be on a graduate visa"]
+    answer: "No"
   - id: reasonable_adjustments
     patterns: ["reasonable adjustment"]
     answer: "Yes"            # "Yes" or "No"
   - id: a_level_maths
     patterns: ["a-?level math"]
-    answer: "Yes"            # "Yes" or "No"
+    answer: "I completed an equivalent Maths course"            # "Yes" or "No"
   - id: sponsorship
     patterns: ["sponsor", "require.*visa", "visa.*requir"]
     answer: "Yes"            # "Yes" or "No"

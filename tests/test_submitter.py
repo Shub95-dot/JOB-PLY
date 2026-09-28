@@ -62,3 +62,29 @@ def test_captcha_goes_to_manual(page, answered_cfg, profile, cv, tmp_path):
 def test_rejected_submission_is_failed_not_applied(page, answered_cfg, profile, cv, tmp_path):
     out = _sub(page, "lever", answered_cfg, profile, cv, tmp_path).apply((FORMS / "broken_form.html").as_uri())
     assert out.status == Status.FAILED
+
+
+def test_yes_no_never_typed_into_text_and_followups_skipped(page, answered_cfg, profile, cv, tmp_path):
+    import copy
+    cfg = copy.deepcopy(answered_cfg)
+    cfg["rules"].insert(0, {"id": "graduate_visa", "patterns": ["graduate visa"], "answer": "Yes"})
+    html = """<form id=application-form>
+      <label>Full name ✱<input name=name required></label>
+      <label>Email ✱<input name=email type=email required></label>
+      <label>Resume ✱<input type=file name=resume required></label>
+      <div class=q><div>Will you be on a Graduate visa by your start date? ✱</div>
+        <label><input type=radio name=gv value=Yes required>Yes</label><label><input type=radio name=gv value=No>No</label></div>
+      <label>If you selected yes, please provide details of your Graduate visa status<textarea name=gvd></textarea></label>
+      <label>Graduate visa reference<input name=gvref></label>
+      <button id=btn-submit type=submit>Submit application</button></form>"""
+    p = tmp_path / "f.html"
+    p.write_text(html, encoding="utf-8")
+    from src.apply.answers import Answers
+    from src.apply.form_engine import FormEngine
+    page.goto(p.as_uri())
+    eng = FormEngine(page, Answers(cfg, profile), cv, None)
+    plan = eng.plan()
+    filled = {a.control.label.split("\n")[0][:40]: a.value for a in plan.actions}
+    assert any(v == "Yes" for k, v in filled.items() if "Graduate visa by" in k)       # radio answered
+    assert not any("details" in k for k in filled)                                       # follow-up left alone
+    assert not any("reference" in k for k in filled)                                     # no "Yes" typed into text
