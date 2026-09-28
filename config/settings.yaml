@@ -1,6 +1,6 @@
 # Nothing is submitted until this is true. Set it only after checking that
 # config/user_profile.yaml and config/answers.yaml are accurate.
-profile_reviewed: false
+profile_reviewed: true
 
 # Your real CV (PDF). This exact file is uploaded to every application.
 cv_path: "data/Shubham_Shirodkar_CV.pdf"

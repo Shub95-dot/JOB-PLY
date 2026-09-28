@@ -13,6 +13,7 @@ and walks you through the rest.
   python main.py show KEY            full record + event history for one job
   python main.py mark KEY STATUS     e.g. mark reed:5735521 interview   (interview -> writes prep guide)
   python main.py prep KEY            write/refresh the interview-prep guide for one job
+  python main.py letter KEY          show the cover letter for a job (writes one if missing)
   python main.py digest              write today's HTML digest (and email it if SMTP is set)
   python main.py import-legacy FILE  import the old application_tracker.json as UNVERIFIED
   python main.py check-boards        test every Greenhouse/Lever/Ashby token in sources.yaml
@@ -63,6 +64,8 @@ def main(argv=None) -> int:
     m.add_argument("status", choices=[x.value for x in (Status.RESPONDED, Status.INTERVIEW, Status.REJECTED,
                                                         Status.OFFER, Status.SKIPPED, Status.NEEDS_MANUAL)])
     m.add_argument("--note", default="")
+    lt = sub.add_parser("letter", help="show (and create if missing) the cover letter for one job")
+    lt.add_argument("key")
     pr = sub.add_parser("prep", help="write the interview-prep guide for one job")
     pr.add_argument("key")
     sub.add_parser("digest")
@@ -114,6 +117,21 @@ def main(argv=None) -> int:
     profile = Profile.load()
     pipe = Pipeline(settings, tracker, profile, notifier=notifier)
     try:
+        if args.cmd == "letter":
+            from src.content.cover_letter import CoverLetterWriter, save_letter
+            from src.core.tracker import row_list as _rl
+            from src.pipeline import row_to_job, _safe
+            r = tracker.get(args.key)
+            if not r:
+                print("unknown key — copy it from `status`, the digest or the assist output")
+                return 1
+            text = r["cover_letter"] or CoverLetterWriter(profile, settings.llm_model).write(row_to_job(r), _rl(r, "matched_skills")).text
+            tracker.update_fields(args.key, cover_letter=text)
+            ev = settings.evidence_dir / _safe(args.key)
+            pdf = save_letter(text, ev)
+            (ev / "cover_letter.txt").write_text(text, encoding="utf-8")
+            print(text + f"\n\nSaved: {pdf}\n       {ev / 'cover_letter.txt'}")
+            return 0
         if args.cmd == "prep":
             path = pipe.interview_prep(args.key)
             print(f"interview prep: {path}" if path else "not generated (unknown key or disabled)")

@@ -79,3 +79,50 @@ def test_refilter_recovers_jobs_after_rule_change(settings, profile):
     pipe._route = lambda j: t.update_fields(j.key, ats="reed", apply_url=j.url)
     assert pipe.refilter()["now_shortlisted"] == 1
     assert t.get(job.key)["status"] == "shortlisted"
+
+
+def test_assist_writes_letter_for_legacy_jobs(settings, profile, monkeypatch):
+    from contextlib import contextmanager
+    t = Tracker(settings.db_path)
+    pipe = Pipeline(settings, t, profile, sources_cfg={})
+    job = Job(source="legacy", source_id="https://x/1", title="Data Analyst", company="KP Law", url="https://x/1")
+    t.add_found(job)
+    t.set_status(job.key, Status.NEEDS_MANUAL, "from old tool")
+
+    class P:
+        url = "about:blank"
+        def goto(self, *a, **k): pass
+        def inner_text(self, *a, **k): return ""
+        def screenshot(self, *a, **k): pass
+
+    class C:
+        pages = [P()]
+
+    @contextmanager
+    def fake_browser(headless=None):
+        yield C()
+    monkeypatch.setattr(pipe, "browser", fake_browser)
+    opened = []
+    pipe.assist(prompt=lambda _: "l", open_normal=opened.append)
+    assert opened == ["https://x/1"]            # non-ATS jobs open in the normal browser
+    row = t.get(job.key)
+    assert row["cover_letter"] and "KP Law" in row["cover_letter"]
+    assert list(settings.evidence_dir.glob("*/cover_letter.txt"))
+
+
+
+def test_assist_normal_browser_submit_is_recorded(settings, profile):
+    t = Tracker(settings.db_path)
+    pipe = Pipeline(settings, t, profile, sources_cfg={})
+    job = Job(source="reed", source_id="77", title="Junior Data Analyst", company="Delta",
+              description=DESC, url="https://www.reed.co.uk/jobs/x/77")
+    t.add_found(job)
+    t.update_fields(job.key, ats="reed", apply_url=job.url)
+    t.set_status(job.key, Status.NEEDS_MANUAL, "reed has no reliable auto-apply")
+    def no_tool_browser(*a, **k):
+        raise AssertionError("tool browser must not start for Reed jobs")
+    pipe.browser = no_tool_browser
+    res = pipe.assist(prompt=lambda _: "a", open_normal=lambda u: None)
+    assert res["applied"] == 1
+    row = t.get(job.key)
+    assert row["status"] == "applied" and row["apply_method"] == "user_confirmed"

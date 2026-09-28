@@ -296,38 +296,63 @@ class Pipeline:
         return None
 
     # ================================================================== 4. assist (you click submit)
-    def assist(self, limit: int = 20, prompt=input) -> dict:
-        """Opens each NEEDS_MANUAL / FAILED job, pre-fills what it can, and waits for YOU to submit.
-        Marked APPLIED only when the ATS confirmation is seen or you type 'a'."""
+    def assist(self, limit: int = 20, prompt=input, open_normal=None) -> dict:
+        """Walks you through NEEDS_MANUAL / FAILED jobs. Marked APPLIED only when the ATS confirmation
+        is seen or you type 'a'.
+
+        * Greenhouse / Lever / Ashby jobs open in the tool's browser so the form can be pre-filled.
+        * Everything else (Reed, Adzuna, company sites...) opens in YOUR normal default browser —
+          your usual logins, no "controlled by automated test software" bar, no bot-check blocks.
+        """
+        import webbrowser
+        from contextlib import ExitStack
+        open_normal = open_normal or webbrowser.open
         self.check_gates()
         queue = self.t.by_status(Status.NEEDS_MANUAL, Status.FAILED)[:limit]
         stats = {"applied": 0, "skipped": 0, "later": 0}
         if not queue:
             print("Nothing waiting for you.")
             return stats
-        with self.browser(headless=False) as ctx:
-            page = ctx.pages[0] if ctx.pages else ctx.new_page()
+        writer = CoverLetterWriter(self.profile, self.s.llm_model)
+        use_tool_browser = self.s.raw.get("assist", {}).get("prefill_in_tool_browser", True)
+        with ExitStack() as stack:
+            page = None                                   # tool browser, started only if needed
             for n, r in enumerate(queue, 1):
                 job = row_to_job(r)
                 ev = self.s.evidence_dir / _safe(job.key)
                 ev.mkdir(parents=True, exist_ok=True)
+                url = r["apply_url"] or r["url"]
                 print(f"\n[{n}/{len(queue)}] {job.title} — {job.company}  ({r['ats']}, score {r['score'] or 0:.2f})")
+                print(f"  link: {url}")
                 print(f"  why manual: {r['reason']}")
                 for q in row_list(r, "unanswered"):
                     print(f"  • {q}")
-                if r["cover_letter"]:
-                    cl = save_letter(r["cover_letter"], ev)
-                    print(f"  cover letter: {cl}")
-                url = r["apply_url"] or r["url"]
-                try:
-                    page.goto(url, wait_until="domcontentloaded", timeout=45000)
-                except Exception as e:
-                    print(f"  could not open page: {e}")
-                if r["ats"] in ADAPTERS:
+                letter = r["cover_letter"]
+                if not letter:                       # e.g. old imported jobs — write one now
+                    letter = writer.write(job, row_list(r, "matched_skills")).text
+                    self.t.update_fields(job.key, cover_letter=letter)
+                cl = save_letter(letter, ev)
+                (ev / "cover_letter.txt").write_text(letter, encoding="utf-8")
+                print(f"  cover letter: {cl}")
+                print(f"  (copy-paste text: {ev / 'cover_letter.txt'})")
+                print(f"  CV: {self.s.cv_path}")
+
+                in_tool = use_tool_browser and r["ats"] in ADAPTERS
+                if in_tool:
+                    if page is None:
+                        ctx = stack.enter_context(self.browser(headless=False))
+                        page = ctx.pages[0] if ctx.pages else ctx.new_page()
+                    try:
+                        page.goto(url, wait_until="domcontentloaded", timeout=45000)
+                    except Exception as e:
+                        print(f"  could not open page: {e}")
                     self._prefill(page, r, ev)
-                    print("  Form pre-filled where answers are configured. Check it, answer the rest, submit.")
+                    print("  Opened in the tool's browser with the form pre-filled. Check it, answer the rest, submit.")
+                    print("  (If that page is blocked, open the link above in your normal browser instead.)")
                 else:
-                    print("  Apply on this page (log in if needed), then come back here.")
+                    open_normal(url)
+                    print("  Opened in your normal browser. Apply there, then come back here.")
+
                 while True:
                     ans = prompt("  [a] I submitted it   [s] skip (not applying)   [l] later   [q] quit > ").strip().lower()
                     if ans in ("a", "s", "l", "q"):
@@ -341,14 +366,19 @@ class Pipeline:
                     self.t.set_status(job.key, Status.SKIPPED, "skipped in assist mode")
                     stats["skipped"] += 1
                     continue
-                body = _body(page)
-                ad = ADAPTERS.get(r["ats"])
-                seen = bool(ad and (ad.success_text.search(body) or ad.success_url.search(page.url)))
-                try:
-                    page.screenshot(path=str(ev / "assist_after_submit.png"), full_page=True)
-                except Exception:
-                    pass
-                (ev / "assist_page.txt").write_text(f"URL: {page.url}\n\n{body[:4000]}", encoding="utf-8")
+                seen, body = False, ""
+                if in_tool and page is not None:
+                    body = _body(page)
+                    ad = ADAPTERS.get(r["ats"])
+                    seen = bool(ad and (ad.success_text.search(body) or ad.success_url.search(page.url)))
+                    try:
+                        page.screenshot(path=str(ev / "assist_after_submit.png"), full_page=True)
+                    except Exception:
+                        pass
+                    (ev / "assist_page.txt").write_text(f"URL: {page.url}\n\n{body[:4000]}", encoding="utf-8")
+                else:
+                    (ev / "assist_page.txt").write_text(f"URL: {url}\nSubmitted by you in your normal browser.\n",
+                                                        encoding="utf-8")
                 self.t.set_status(job.key, Status.APPLIED,
                                   "confirmation detected" if seen else "you confirmed submission",
                                   confirmation_text=(body[:200] if seen else None), method="user_confirmed",
