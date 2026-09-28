@@ -15,10 +15,10 @@ rules:
   # ---- eligibility (legal statements — you must fill these in yourself) ----
   - id: sponsorship
     patterns: ["sponsor", "require.*visa", "visa.*requir"]
-    answer: TODO            # "Yes" or "No"
+    answer: NO            # "Yes" or "No"
   - id: right_to_work
     patterns: ["right to work", "eligib\\w* to work", "legally (authori[sz]ed|entitled|permitted)", "work permit", "permission to work"]
-    answer: TODO            # "Yes" or "No"
+    answer: Yes           # "Yes" or "No"
   - id: over_18
     patterns: ["18 years", "over (the age of )?18", "at least 18"]
     answer: "Yes"
@@ -26,24 +26,24 @@ rules:
   # ---- logistics ----
   - id: notice_period
     patterns: ["notice period", "when (can|could) you start", "earliest start", "start date", "availability to start"]
-    answer: TODO            # e.g. "2 weeks"
+    answer: "2 weeks"            # e.g. "2 weeks"
   - id: salary
     patterns: ["salary", "compensation", "pay expectation", "expected pay"]
-    answer: TODO            # e.g. "£28,000–£32,000"
+    answer: "£28,000–£32,000"            # e.g. "£28,000–£32,000"
   - id: relocation
     patterns: ["relocat", "commut", "willing to (work|travel) (from|to|in)", "able to (attend|work from) (the|our) office", "hybrid"]
-    answer: TODO            # e.g. "Yes"
+    answer: "Yes"            # e.g. "Yes"
   - id: current_location
     patterns: ["where are you (currently )?(based|located)", "current location", "^location", "^city", "country of residence"]
-    answer: "{location}"
+    answer: "{Southampton, SO143ZP}"
   - id: driving
     patterns: ["driving licen[cs]e", "full uk licen[cs]e"]
-    answer: TODO
+    answer: "No"
 
   # ---- background ----
   - id: education_level
     patterns: ["highest (level of )?(education|qualification)", "degree level"]
-    answer: "Master's"
+    answer: "Masters"
   - id: university
     patterns: ["^(school|university|institution)( name)?$", "which university"]
     answer: "Solent University"
@@ -58,7 +58,7 @@ rules:
     answer: "Team Member"
   - id: years_experience
     patterns: ["years of (relevant |professional )?experience", "how many years"]
-    answer: TODO            # be honest — e.g. "0" or "Less than 1 year" for analytics roles
+    answer: "6 months"            # be honest — e.g. "0" or "Less than 1 year" for analytics roles
 
   # ---- source / misc ----
   - id: heard_about

@@ -45,8 +45,8 @@ skills:
 education:
   - degree: "MSc Artificial Intelligence and Data Science"
     institution: "Solent University, Southampton"
-    graduation_year: 2026                    # CHECK
-    status: "nearly_completed"               # change to "completed" once results are confirmed
+    graduation_year: 2026                    
+    status: "nearly_completed(waiting on results)"               
   - degree: "Bachelor of Physical Education"
     institution: "Don Bosco College, India"
     graduation_year: 2019
@@ -58,7 +58,7 @@ experience:
   - role: "Team Member, Back of House"
     company: "KFC"
     location: "Millbrook, Southampton, UK"
-    dates: "2026 – Present"                  # CHECK start month
+    dates: "March 2026 – Present"                 
     highlights:
       - "Food preparation in a high-volume kitchen to food-safety and quality standards, working to tight service times as part of a shift team"
   - role: "Sortation Associate"
@@ -72,16 +72,16 @@ experience:
     location: "India"
     dates: "2024 – 2025"
     highlights:
-      - "Sold life-insurance products and managed a client pipeline against monthly sales targets"   # CHECK
+      - "Sold life insurance products and managed a client pipeline against monthly sales targets"   
   - role: "Branch Development Manager"
     company: "IndiaFirst Life Insurance"
     location: "India"
     dates: "2022 – 2024"
     highlights:
-      - "Recruited and supported insurance advisors and tracked branch business against targets"   # CHECK
+      - "Recruited and supported insurance advisors and tracked branch business against targets"  
 
 certifications:
-  - title: "The Complete SQL Bootcamp: Go from Zero to Hero (in progress)"   # update once completed
+  - title: "The Complete SQL Bootcamp: Go from Zero to Hero"  
     issuer: "Udemy"
     year: "completing Oct 2026"
     url: "https://www.udemy.com/course/the-complete-sql-bootcamp/"
