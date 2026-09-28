@@ -14,6 +14,7 @@ from pathlib import Path
 from src.apply import ats as ats_mod
 from src.core.models import Job, Status
 from src.core.tracker import Tracker
+from src.jobs.filter import JobFilter
 
 FAKE = re.compile(r"example\.com|/jobs/[\w-]+-jobs\?|outerjoin\.us/job/\d+$|"
                   r"(wellfound\.com/jobs|builtin\.com/job|remote\.co/job|remotejobslibrary\.com/job|"
@@ -38,6 +39,9 @@ def import_legacy(path: Path, tracker: Tracker, requeue: bool = False) -> dict:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     items = data.values() if isinstance(data, dict) else data
     st = {"imported": 0, "fake_dropped": 0, "duplicates": 0}
+    if requeue:
+        st.update(requeued=0, filtered_out=0)
+    jf = JobFilter()
     for it in items:
         url = it.get("url", "")
         if not url or FAKE.search(url):
@@ -52,7 +56,14 @@ def import_legacy(path: Path, tracker: Tracker, requeue: bool = False) -> dict:
         tracker.update_fields(job.key, ats=ats_mod.detect(url).ats,
                               notes=f"old tool claimed 'submitted' at {it.get('submitted_at','?')} — never verified")
         if requeue:
-            tracker.set_status(job.key, Status.NEEDS_MANUAL, "from old tool — never actually submitted")
+            # old entries only have title + company, so apply the title/company/seniority rules
+            res = jf.title_ok(job)
+            if res.accepted:
+                tracker.set_status(job.key, Status.NEEDS_MANUAL, "from old tool — never actually submitted")
+                st["requeued"] += 1
+            else:
+                tracker.set_status(job.key, Status.FILTERED_OUT, f"legacy: {res.reason}")
+                st["filtered_out"] += 1
         else:
             tracker.set_status(job.key, Status.LEGACY_UNVERIFIED, "old tool marked submitted without submitting")
         st["imported"] += 1

@@ -41,6 +41,7 @@ exclude_title_words:
   - "iv"
   - "contract"
   - "freelance"
+  - "apprentice"      # apprenticeships usually exclude people who already hold a Master's in a related subject — remove this line to include them
 
 # Phrases in the title that exclude a job
 exclude_title_phrases:

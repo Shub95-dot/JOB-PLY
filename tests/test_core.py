@@ -133,3 +133,17 @@ def test_cover_letter_guard_catches_invented_numbers(profile):
     job = J()
     fake = ("Dear Hiring Team at Acme, " + "I cut reporting time by 43% at my last analyst job. " + "word " * 160)
     assert any("numbers not in your profile" in p for p in w.check(fake, job))
+
+
+def test_legacy_requeue_filters_junk(tmp_path):
+    old = {
+        "a": {"job_title": "Data Analyst", "company": "KP Law", "url": "https://uk.linkedin.com/jobs/view/data-analyst-at-kp-law-4469714541"},
+        "b": {"job_title": "Entry Level Data Entry Clerk", "company": "JobsInMass.com", "url": "https://remoteOK.com/remote-jobs/remote-entry-level-data-entry-clerk-jobsinmass-com-1135072"},
+        "c": {"job_title": "Data Scientist II - ML Infrastructure", "company": "Pinterest", "url": "https://weworkremotely.com/remote-jobs/pinterest-data-scientist-ii-ml-infrastructure"},
+    }
+    f = tmp_path / "old.json"
+    f.write_text(json.dumps(old))
+    t = Tracker(tmp_path / "t.db")
+    st = import_legacy(f, t, requeue=True)
+    assert st["requeued"] == 1 and st["filtered_out"] == 2
+    assert t.counts() == {"needs_manual": 1, "filtered_out": 2}
