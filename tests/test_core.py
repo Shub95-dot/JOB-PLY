@@ -29,6 +29,8 @@ def jf():
     ("Senior Data Analyst", False), ("Data Scientist II - ML Infrastructure", False),
     ("Remote Data Entry Clerk", False), ("Video Data Annotator", False), ("Lead BI Analyst", False),
     ("Trainee Data Analyst", False), ("Warehouse Operative", False), ("Data Analyst Manager", False),
+    ("Data Analyst (12 Month Contract)", True), ("Business Intelligence Analyst", True),
+    ("Data Quality Analyst", True), ("Data Analyst - Contractor, £400/day", False),
 ])
 def test_titles(jf, title, ok):
     assert jf.evaluate(J(title=title)).accepted is ok

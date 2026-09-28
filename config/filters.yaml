@@ -22,6 +22,21 @@ include_titles:
   - "performance analyst"
   - "operations analyst"
   - "data analytics"
+  - "business analyst"
+  - "business intelligence"
+  - "data quality analyst"
+  - "data management analyst"
+  - "data migration analyst"
+  - "data governance analyst"
+  - "product analyst"
+  - "marketing analyst"
+  - "analytics engineer"
+  - "supply chain analyst"
+  - "forecasting analyst"
+  - "pricing analyst"
+  - "research analyst"
+  - "reporting and insight"
+  - "data officer"
 
 # Whole words in the title that exclude a job
 exclude_title_words:
@@ -39,7 +54,7 @@ exclude_title_words:
   - "ii"
   - "iii"
   - "iv"
-  - "contract"
+  - "contractor"      # day-rate freelance; fixed-term contracts / FTCs are allowed
   - "freelance"
   - "apprentice"      # apprenticeships usually exclude people who already hold a Master's in a related subject — remove this line to include them
 

@@ -7,7 +7,7 @@ cv_path: "data/Shubham_Shirodkar_CV.pdf"
 
 apply:
   daily_cap: 15                               # max VERIFIED submissions per day
-  min_score: 0.35                             # relevance threshold (0–1) to shortlist a job
+  min_score: 0.15                             # relevance (0–1) — mainly for RANKING; only drops very poor matches
   headless: false                             # true for scheduled/unattended runs
   delay_between_applications_seconds: [25, 70]
   confirmation_timeout_seconds: 25

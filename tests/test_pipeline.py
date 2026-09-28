@@ -67,3 +67,15 @@ def test_dry_run_allowed_before_review(settings, profile):
     settings.profile_reviewed = False
     pipe = Pipeline(settings, Tracker(settings.db_path), profile, sources_cfg={})
     assert pipe.apply(dry_run=True)["applied"] == 0      # no GateError; nothing queued
+
+
+def test_refilter_recovers_jobs_after_rule_change(settings, profile):
+    t = Tracker(settings.db_path)
+    pipe = Pipeline(settings, t, profile, sources_cfg={})
+    job = Job(source="reed", source_id="900", title="Data Analyst (12 Month Contract)", company="Omega",
+              location="Southampton", description=DESC, url="https://www.reed.co.uk/jobs/x/900")
+    t.add_found(job)
+    t.set_status(job.key, Status.FILTERED_OUT, "seniority/unsuitable word 'contract' in title")
+    pipe._route = lambda j: t.update_fields(j.key, ats="reed", apply_url=j.url)
+    assert pipe.refilter()["now_shortlisted"] == 1
+    assert t.get(job.key)["status"] == "shortlisted"

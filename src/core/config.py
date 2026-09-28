@@ -47,7 +47,7 @@ class Settings:
             self.cv_path = ROOT / self.cv_path
         a = d.get("apply", {})
         self.daily_cap = int(a.get("daily_cap", 15))
-        self.min_score = float(a.get("min_score", 0.35))
+        self.min_score = float(a.get("min_score", 0.15))
         self.headless = bool(a.get("headless", False))
         self.delay_seconds = tuple(a.get("delay_between_applications_seconds", [25, 70]))
         self.confirm_timeout_s = int(a.get("confirmation_timeout_seconds", 25))

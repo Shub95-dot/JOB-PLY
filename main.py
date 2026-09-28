@@ -4,6 +4,7 @@ and walks you through the rest.
   python main.py run                 discover + prepare + auto-apply (up to daily cap) + digest
   python main.py run --dry-run       same, but fills forms and screenshots WITHOUT clicking submit
   python main.py discover            only fetch/filter/score new postings
+  python main.py refilter            re-check filtered-out jobs after you change filters.yaml / min_score
   python main.py prepare             write cover letters for shortlisted jobs
   python main.py apply [--dry-run]   submit READY jobs on Greenhouse/Lever/Ashby
   python main.py assist              open each job that needs you; you submit, it records it
@@ -44,6 +45,7 @@ def main(argv=None) -> int:
     r.add_argument("--no-llm", action="store_true")
     r.add_argument("--limit", type=int)
     sub.add_parser("discover")
+    sub.add_parser("refilter", help="re-check filtered-out jobs after changing filters.yaml / min_score")
     p = sub.add_parser("prepare")
     p.add_argument("--no-llm", action="store_true")
     a = sub.add_parser("apply")
@@ -115,6 +117,9 @@ def main(argv=None) -> int:
         if args.cmd == "prep":
             path = pipe.interview_prep(args.key)
             print(f"interview prep: {path}" if path else "not generated (unknown key or disabled)")
+            return 0
+        if args.cmd == "refilter":
+            print(pipe.refilter())
             return 0
         if args.cmd == "discover":
             print(pipe.discover())

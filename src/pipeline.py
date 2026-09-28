@@ -129,6 +129,38 @@ class Pipeline:
         log.info("discover: %s", stats)
         return stats
 
+    def refilter(self) -> dict:
+        """Re-check FILTERED_OUT jobs against the current filters.yaml / min_score (after you change them)."""
+        st = {"checked": 0, "now_shortlisted": 0, "still_filtered": 0}
+        for r in self.t.by_status(Status.FILTERED_OUT, order="found_at"):
+            job = row_to_job(r)
+            st["checked"] += 1
+            if job.source in ("legacy", "linkedin") or not job.description:
+                res = self.filter.title_ok(job)       # old imports only have a title
+                if res.accepted:
+                    self.t.set_status(job.key, Status.NEEDS_MANUAL, "re-checked: passes current filters")
+                    st["now_shortlisted"] += 1
+                else:
+                    self.t.update_fields(job.key, reason=f"legacy: {res.reason}")
+                    st["still_filtered"] += 1
+                continue
+            res = self.filter.evaluate(job)
+            if not res.accepted:
+                self.t.update_fields(job.key, reason=res.reason)
+                st["still_filtered"] += 1
+                continue
+            sc = self.scorer.score(job.title + " " + job.description)
+            self.t.update_fields(job.key, score=sc.value, matched_skills=sc.have, missing_skills=sc.missing)
+            if sc.value < self.s.min_score:
+                self.t.update_fields(job.key, reason=f"relevance {sc.value:.2f} < {self.s.min_score}")
+                st["still_filtered"] += 1
+                continue
+            self._route(job)
+            self.t.set_status(job.key, Status.SHORTLISTED, f"re-checked: relevance {sc.value:.2f}")
+            st["now_shortlisted"] += 1
+        log.info("refilter: %s", st)
+        return st
+
     def _route(self, job: Job) -> None:
         """Find out where the application form lives; remember any ATS boards we discover."""
         target = ats_mod.detect(job.apply_url or job.url)
