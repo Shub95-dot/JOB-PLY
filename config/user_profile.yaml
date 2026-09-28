@@ -19,55 +19,79 @@ preferred_name: "Shubham"
 
 contact:
   email: "shirodkarshubham9@gmail.com"
-  phone: "+44 7721 708679"                  # CHECK
+  phone: "+44 7721 708679"
   location: "Southampton, United Kingdom"
   city: "Southampton"
-  linkedin: ""                               # TODO: your real LinkedIn URL (old file had a placeholder)
+  linkedin: "https://www.linkedin.com/in/shubham-shirodkar-53b531223/"
   github: "https://github.com/Shub95-dot"
-  portfolio: ""
+  portfolio: "https://github.com/Shub95-dot"
 
 summary: >
-  MSc Artificial Intelligence and Data Science graduate from Solent University looking for an
-  entry-level Data Analyst or junior Data Science role in the UK. Self-taught in SQL and Power BI;
-  builds end-to-end Python pipelines for data cleaning, exploratory analysis, modelling and
-  dashboards. Brings the reliability and customer focus of several years in sales and
-  fast-paced operational roles.
+  MSc Artificial Intelligence and Data Science (Solent University) and first author of a peer-reviewed
+  paper on machine-learning classification of maternal health risk. Builds complete analysis pipelines
+  in Python and SQL: cleaning and validating messy data, exploratory analysis, modelling, and
+  communicating results through Tableau and Power BI dashboards. From 2022 to 2025 worked in
+  life-insurance sales and branch development in India; currently works in fast-paced operational
+  roles in the UK. Looking for an entry-level Data Analyst or Junior Data Scientist role in the UK.
 
 skills:
   languages: ["Python", "SQL"]
-  analysis: ["Pandas", "NumPy", "Exploratory Data Analysis", "Data Cleaning", "Statistics", "Hypothesis Testing"]
-  bi: ["Power BI", "Tableau", "Excel", "Dashboards"]
-  ml: ["Scikit-Learn", "XGBoost", "LightGBM", "Machine Learning", "Classification", "Regression"]
+  analysis: ["Pandas", "NumPy", "Matplotlib", "Data Cleaning", "Exploratory Data Analysis"]
+  bi: ["Tableau", "Power BI"]
+  ml: ["Scikit-Learn", "XGBoost", "LightGBM", "SMOTE", "Machine Learning", "Cross-validation", "LSTM", "TCN", "Transformer"]
   engineering: ["Git", "GitHub Actions", "FastAPI", "Streamlit", "Jupyter"]
   computer_vision: ["OpenCV", "MediaPipe"]
 
 education:
   - degree: "MSc Artificial Intelligence and Data Science"
     institution: "Solent University, Southampton"
-    graduation_year: 2026                    # CHECK (dissertation submitted Sept 2026)
+    graduation_year: 2026                    # CHECK
     status: "nearly_completed"               # change to "completed" once results are confirmed
+  - degree: "Bachelor of Physical Education"
+    institution: "Don Bosco College, India"
+    graduation_year: 2019
+  - degree: "BSc Chemistry"
+    institution: "Chowgule College, India"
+    graduation_year: 2017
 
-experience:                                   # CHECK dates — none were given, so none are listed
-  - role: "Team Member"
+experience:
+  - role: "Team Member, Back of House"
     company: "KFC"
-    location: "Southampton, UK"
+    location: "Millbrook, Southampton, UK"
+    dates: "2026 – Present"                  # CHECK start month
     highlights:
-      - "Customer service and food preparation in a high-volume, time-critical environment"
-  - role: "Warehouse Associate"
-    company: "IVOXX"
-    location: "UK"
-    highlights:
-      - "Picking, packing and stock handling to accuracy and time targets"
+      - "Food preparation in a high-volume kitchen to food-safety and quality standards, working to tight service times as part of a shift team"
   - role: "Sortation Associate"
     company: "Amazon"
-    location: "UK"
+    location: "Poole, UK"
+    dates: "Nov 2025 – Jan 2026"
     highlights:
-      - "Parcel sortation against throughput and accuracy targets"
-  - role: "Insurance Sales"
-    company: ""                              # TODO: employer name
+      - "Sorted parcels to delivery routes against shift accuracy and throughput targets during peak season"
+  - role: "Sales Manager"
+    company: "Kotak Life Insurance"
     location: "India"
+    dates: "2024 – 2025"
     highlights:
-      - "Advised customers on insurance products and managed a sales pipeline"
+      - "Sold life-insurance products and managed a client pipeline against monthly sales targets"   # CHECK
+  - role: "Branch Development Manager"
+    company: "IndiaFirst Life Insurance"
+    location: "India"
+    dates: "2022 – 2024"
+    highlights:
+      - "Recruited and supported insurance advisors and tracked branch business against targets"   # CHECK
+
+certifications:
+  - title: "The Complete SQL Bootcamp: Go from Zero to Hero (in progress)"   # update once completed
+    issuer: "Udemy"
+    year: "completing Oct 2026"
+    url: "https://www.udemy.com/course/the-complete-sql-bootcamp/"
+  - title: "The Data Analyst Course: Complete Data Analyst Bootcamp"
+    issuer: "365 Careers (Udemy)"
+    year: "Dec 2025"
+  - title: "Intermediate Machine Learning"
+    issuer: "Kaggle"
+
+languages: ["English", "Hindi", "Konkani"]
 
 publications:
   - title: "Maternal Health Risk Prediction in Bangladesh Using Machine Learning"
@@ -91,6 +115,7 @@ projects:
     verified: true                           # figures below are from the published abstract
     results:
       - "Random Forest reached 88.2% accuracy, 0.889 macro recall and 0.966 AUC across seven compared classifiers"
+      - "5-fold cross-validated recall was 0.857 for Random Forest and 0.858 for XGBoost"
       - "Blood sugar and an engineered composite risk score were the two strongest predictors"
       - "I built a Tableau dashboard to support clinical decision-making"
 
@@ -105,7 +130,7 @@ projects:
       - "Deployed with a FastAPI backend, Streamlit dashboard and CI through GitHub Actions"
 
   - title: "Sensorless Markerless Kinematic Screening Framework (MSc dissertation)"
-    short_title: "Sensorless Kinematic Screening (MSc dissertation)"
+    short_title: "STRIDE (MSc dissertation)"
     summary: "built a video-based pipeline that extracts joint kinematics without sensors or markers for squat, lunge and drop-jump screening, validated against OpenCap reference data, with uncertainty weighting and counterfactual explanations"
     tech: ["Python", "OpenCV", "MediaPipe", "Statistics", "Bland-Altman analysis", "Explainable AI"]
     url: "https://github.com/Shub95-dot/Sensorless-Multimodal-Athlete-Intelligence-System"
