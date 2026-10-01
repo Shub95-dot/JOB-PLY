@@ -1,4 +1,4 @@
-# job-app-agent v2
+# job-app-agent
 
 Finds entry-level UK data roles through official job APIs. It submits applications on the
 ATS forms it can handle reliably (Greenhouse, Lever, Ashby) and checks each one. For
@@ -8,18 +8,23 @@ everything else it opens the form for you, pre-filled.
 detected (text, URL and screenshots are saved), or when you confirm it yourself in assist
 mode.** The tracker refuses to set `applied` any other way.
 
-## What changed from v1 (and why v1 never applied)
+## Requirements
 
-| v1 | v2 |
-|---|---|
-| No submission code at all; wrote `status: submitted` for every job it saw | Playwright submitter for Greenhouse / Lever / Ashby, with confirmation-page verification and screenshot evidence |
-| ~15 of 25 "sources" returned hardcoded fake jobs (`example.com`, `wellfound.com/jobs/jr-ds`…) | Real APIs only: Reed, Adzuna, Greenhouse/Lever/Ashby job-board APIs (Remotive optional) |
-| LinkedIn scraper gave every job the same invented description ("Required skills: Python, SQL…"), so the filter passed everything | No LinkedIn/Indeed scraping (against their terms; gets accounts restricted). Descriptions come from the posting |
-| Duplicates by hashed URL incl. tracking params (35 repeat entries) | Deduped by platform job ID **and** company+title fingerprint across sources |
-| Data-entry, annotator, German-language, US-only and senior roles got through | Stricter title/company/location/language/experience filters, each rejection stored with its reason |
-| Profile contained an invented job ("Data Solutions Lab, 2023–24") and unverified metrics, which the cover letters used | Profile rebuilt from your real history; metrics only used when you mark a project `verified: true`; letters are checked for invented numbers |
-| JSON file tracker, status set without checks | SQLite tracker with an event history per job; `applied` requires evidence |
-| Outlook SMTP (basic auth mostly switched off) | Any SMTP server, e.g. Gmail with an app password |
+- Python 3.11+
+- `pip` and a virtual environment
+- Playwright Chromium: `python -m playwright install chromium`
+- Free API keys for:
+  - Reed
+  - Adzuna
+  - Jooble
+- Optional:
+  - `ANTHROPIC_API_KEY` for better cover letters
+  - SMTP credentials for digest email delivery
+- A CV PDF at `data/Shubham_Shirodkar_CV.pdf`, or set `cv_path` in `config/settings.yaml`
+- Config files filled in:
+  - `config/user_profile.yaml`
+  - `config/answers.yaml`
+  - `config/sources.yaml`
 
 ## Job sources (13)
 
@@ -31,10 +36,10 @@ mode.** The tracker refuses to set `applied` any other way.
 
 **Location rules** (`config/filters.yaml`):
 
-- **Remote:** accepted from any country. Postings that only hire from regions excluding the UK ("USA only", "Remote - US", "LATAM") are skipped, because they can't legally employ you from the UK. Set `remote_reject_region_locked: false` to apply to those anyway.
+- **Remote:** accepted from any country. Postings that only hire from regions excluding the UK ("USA only", "Remote - US", "LATAM") are skipped, because they can't legally employ you from the UK.
 - **Hybrid and on-site:** UK only.
 
-**Where applications get submitted automatically:** only Greenhouse, Lever and Ashby forms. A job from any of the 13 sources is auto-submitted if its apply link leads to one of those three. Otherwise it's flagged for assist mode.
+**Where applications get submitted automatically:** only Greenhouse, Lever and Ashby forms. A job from any of the 13 sources is auto-submitted if its apply link leads to one of those three. Otherwise it goes to assist mode.
 
 **Not included:** LinkedIn, Indeed, Totaljobs, CV-Library and Glassdoor. None of them has a public API, and their terms prohibit bots.
 
@@ -69,7 +74,7 @@ Every job that isn't auto-submitted gets status `needs_manual` or `failed`, with
 
 ## Interview prep
 
-For every **verified** application, a guide is written to `data/interview_prep/<Company>_<Role>.md`. It's rebuilt when you run `python main.py mark KEY interview`, or on demand with `python main.py prep KEY`.
+For every **verified** application, a guide is written to `data/interview_prep/<Company>_<Role>.md`. It's rebuilt when you run `python main.py mark KEY interview`, or on demand with `python main.py prepare-interview`.
 
 Everything in it comes from the real posting and your profile. Nothing is invented:
 
@@ -80,8 +85,6 @@ Everything in it comes from the real posting and your profile. Nothing is invent
 - STAR outlines for your projects (results only from `verified: true` projects);
 - your publication and DOI;
 - questions to ask them.
-
-v1 wrote a guide for every job it saw, including data-entry and fake listings. v2 writes one only for applications that actually went in.
 
 To get @-pinged for "could not apply" and errors, set `mention_user_id` to your Discord user ID. To find it, turn on Developer Mode, then right-click your name → Copy User ID.
 
@@ -175,7 +178,7 @@ those entries were ever sent, so `--requeue` lets you actually apply to the real
 
 ## Limits
 
-- **Coverage.** Auto-submit covers Greenhouse, Lever and Ashby only. Many UK employers use Workday, SuccessFactors, Taleo or their own portals, and those need accounts or multi-page flows. Reed and LinkedIn "Easy Apply" need your login and are against their terms to automate. All of these go to assist mode.
+- **Coverage.** Auto-submit covers Greenhouse, Lever and Ashby only. Many UK employers use Workday, SuccessFactors, Taleo or their own portals, and those need accounts or multi-page flows. Reed and other aggregator jobs often still need manual review or assist mode.
 - **CAPTCHAs.** The tool never tries to solve a CAPTCHA. The job moves to assist mode and you finish it.
 - **Unanswered questions.** A question without a rule in `answers.yaml` blocks submission for that job. The digest lists the exact wording so you can add a rule. Answers are never AI-generated.
 - **Form layouts change.** ATS forms change occasionally. Failed confirmations show up as `failed` with a screenshot, never as `applied`.
@@ -198,3 +201,4 @@ pytest -q
 - **Full pipeline:** one end-to-end run.
 - **Browser:** Playwright runs on local copies of Greenhouse-, Lever- and Ashby-style forms.
   - Covers successful submit plus confirmation, dry run, unanswered required question, CAPTCHA, and rejected submission.
+
