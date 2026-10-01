@@ -1,12 +1,8 @@
 # job-app-agent
 
-Finds entry-level UK data roles through official job APIs. It submits applications on the
-ATS forms it can handle reliably (Greenhouse, Lever, Ashby) and checks each one. For
-everything else it opens the form for you, pre-filled.
+Finds entry-level UK data roles through official job APIs and automates the application flow where supported. It submits applications on the ATS forms it can handle reliably (Greenhouse, Lever, Ashby) and checks each one. For everything else, it opens the form pre-filled for manual completion.
 
-**An application is recorded as `applied` only when the employer's confirmation page is
-detected (text, URL and screenshots are saved), or when you confirm it yourself in assist
-mode.** The tracker refuses to set `applied` any other way.
+**An application is recorded as `applied` only when the employer's confirmation page is detected (text, URL and screenshots are saved), or when you confirm it yourself in assist mode.** The tracker refuses to set `applied` any other way.
 
 ## Requirements
 
@@ -25,6 +21,12 @@ mode.** The tracker refuses to set `applied` any other way.
   - `config/user_profile.yaml`
   - `config/answers.yaml`
   - `config/sources.yaml`
+
+## Overview
+
+JOB-PLY helps find and apply to entry-level UK data roles using a mix of official job APIs, remote job boards, and company ATS career pages. It filters jobs by location, title, experience, and language requirements, then ranks them against your profile before deciding whether to auto-apply or route them into assist mode.
+
+Jobs are deduplicated across sources and tracked with evidence, so only jobs with confirmation are marked as applied.
 
 ## Job sources (13)
 
