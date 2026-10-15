@@ -1,8 +1,8 @@
 # job-app-agent
 
-Finds entry-level UK data roles through official job APIs and automates the application flow where supported. It submits applications on the ATS forms it can handle reliably (Greenhouse, Lever, Ashby) and checks each one. For everything else, it opens the form pre-filled for manual completion.
+Finds entry-level UK data roles through official job APIs and automates the application flow where supported. It submits applications on the ATS forms it can handle reliably (Greenhouse, Lever, Ashby), records evidence, and helps you finish the rest manually when a form is unsupported or blocked.
 
-**An application is recorded as `applied` only when the employer's confirmation page is detected (text, URL and screenshots are saved), or when you confirm it yourself in assist mode.** The tracker refuses to set `applied` any other way.
+**An application is recorded as `applied` only when the employer's confirmation page is detected (text, URL and screenshots are saved), or when you confirm it yourself in assist mode.** The tracker keeps an audit trail of each status transition.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ Finds entry-level UK data roles through official job APIs and automates the appl
 
 ## Overview
 
-JOB-PLY helps find and apply to entry-level UK data roles using a mix of official job APIs, remote job boards, and company ATS career pages. It filters jobs by location, title, experience, and language requirements, then ranks them against your profile before deciding whether to auto-apply or route them into assist mode.
+JOB-PLY helps find and apply to entry-level UK data roles using a mix of official job APIs, remote job boards, and company ATS career pages. It filters jobs by location, title, experience, and language, ranks them against your profile, and auto-submits where the flow is reliable.
 
 Jobs are deduplicated across sources and tracked with evidence, so only jobs with confirmation are marked as applied.
 
@@ -41,7 +41,7 @@ Jobs are deduplicated across sources and tracked with evidence, so only jobs wit
 - **Remote:** accepted from any country. Postings that only hire from regions excluding the UK ("USA only", "Remote - US", "LATAM") are skipped, because they can't legally employ you from the UK.
 - **Hybrid and on-site:** UK only.
 
-**Where applications get submitted automatically:** only Greenhouse, Lever and Ashby forms. A job from any of the 13 sources is auto-submitted if its apply link leads to one of those three. Otherwise it goes to assist mode.
+**Where applications get submitted automatically:** only Greenhouse, Lever and Ashby forms. A job from any of the 13 sources is auto-submitted if its apply link leads to one of those three. Otherwise it enters assist mode or is marked as failed/needs manual.
 
 **Not included:** LinkedIn, Indeed, Totaljobs, CV-Library and Glassdoor. None of them has a public API, and their terms prohibit bots.
 
@@ -59,11 +59,24 @@ Every job that isn't auto-submitted gets status `needs_manual` or `failed`, with
 
 ## Discord notifications
 
-1. In your Discord server, open the channel's settings: **Edit Channel → Integrations → Webhooks → New Webhook → Copy Webhook URL**.
-2. Put the URL in `.env` as `DISCORD_WEBHOOK_URL=...`. The old JOB-PLY name `DISCORD_APPLICATIONS_WEBHOOK` also works, so your existing `.env` needs no change.
-3. Run `python main.py test-discord`. A test message should appear in the channel.
+JOB-PLY can send run summaries, application confirmations, and manual-follow-up alerts to a Discord channel using a webhook.
 
-**What you get** (each type can be switched on or off in `settings.yaml → notifications.discord`):
+### How to enable Discord
+
+1. In your Discord server, open the channel settings: **Edit Channel → Integrations → Webhooks → New Webhook → Copy Webhook URL**.
+2. Put the URL in `.env` as `DISCORD_WEBHOOK_URL=...`.
+3. The older JOB-PLY variable name `DISCORD_APPLICATIONS_WEBHOOK` still works if you already have it set.
+4. Run:
+
+```bash
+python main.py test-discord
+```
+
+A test message should appear in the channel.
+
+### What you get
+
+Each type can be switched on or off in `config/settings.yaml` under the `notifications.discord` section:
 
 | Message | When |
 |---|---|
@@ -76,7 +89,7 @@ Every job that isn't auto-submitted gets status `needs_manual` or `failed`, with
 
 ## Interview prep
 
-For every **verified** application, a guide is written to `data/interview_prep/<Company>_<Role>.md`. It's rebuilt when you run `python main.py mark KEY interview`, or on demand with `python main.py prepare-interview`.
+For every **verified** application, a guide is written to `data/interview_prep/<Company>_<Role>.md`. It's rebuilt when you run `python main.py mark KEY interview`, or on demand with `python main.py prep KEY`.
 
 Everything in it comes from the real posting and your profile. Nothing is invented:
 
@@ -103,7 +116,7 @@ apply     ->  for Greenhouse/Lever/Ashby jobs: open form, fill from profile + an
               otherwise submit and wait for the confirmation page -> applied / failed
 assist    ->  everything else (Reed, Workable, company sites, CAPTCHA, unanswered questions):
               opens the page pre-filled; you submit; it records the evidence
-digest    ->  data/digest/digest_YYYY-MM-DD.html (+ email if SMTP set)
+digest    ->  data/digest/digest_YYYY-MM-DD.html (+ email if SMTP is set)
 ```
 
 ## Setup (about 20 minutes, once)
@@ -143,7 +156,7 @@ copy .env.example .env           # then fill it in
 5. **`config/sources.yaml`**: add companies you'd like to work for that use Greenhouse, Lever or Ashby.
    - The company's careers page link shows the token, e.g. `job-boards.greenhouse.io/<token>`.
    - Run `python main.py check-boards` to confirm each token works.
-6. **Test without submitting:**
+6. **Test without submitting**:
    ```bash
    python main.py run --dry-run
    ```
@@ -160,9 +173,27 @@ python main.py show greenhouse:acme/12345     # full record, cover letter, histo
 python main.py mark reed:5735521 interview    # record replies: responded/interview/rejected/offer
 ```
 
+### Scheduling (Linux/macOS)
+
+If you want JOB-PLY to run automatically, use `run_daily.sh` with cron. The script activates the venv and runs `python main.py run` in the project directory.
+
+Example: run twice a day at 08:30 and 20:30:
+
+```bash
+crontab -e
+```
+
+Add:
+
+```cron
+30 8,20 * * * cd /path/to/JOB-PLY && /path/to/JOB-PLY/.venv/bin/bash run_daily.sh >> /path/to/JOB-PLY/logs/cron.log 2>&1
+```
+
+For unattended runs, set `headless: true` in `config/settings.yaml` so Playwright runs without opening a visible browser window.
+
 ### Scheduling (Windows)
 
-Use Task Scheduler → Create Basic Task → Daily 08:30:
+Use Task Scheduler → Create Basic Task → Daily 08:30 (and optionally another task at 20:30):
 
 - **Action:** `run_daily.bat`
 - **Start in:** the project folder
@@ -180,7 +211,7 @@ those entries were ever sent, so `--requeue` lets you actually apply to the real
 
 ## Limits
 
-- **Coverage.** Auto-submit covers Greenhouse, Lever and Ashby only. Many UK employers use Workday, SuccessFactors, Taleo or their own portals, and those need accounts or multi-page flows. Reed and other aggregator jobs often still need manual review or assist mode.
+- **Coverage.** Auto-submit covers Greenhouse, Lever and Ashby only. Many UK employers use Workday, SuccessFactors, Taleo or their own portals, and those need accounts or multi-page flows. Reed and other boards may require manual action.
 - **CAPTCHAs.** The tool never tries to solve a CAPTCHA. The job moves to assist mode and you finish it.
 - **Unanswered questions.** A question without a rule in `answers.yaml` blocks submission for that job. The digest lists the exact wording so you can add a rule. Answers are never AI-generated.
 - **Form layouts change.** ATS forms change occasionally. Failed confirmations show up as `failed` with a screenshot, never as `applied`.
